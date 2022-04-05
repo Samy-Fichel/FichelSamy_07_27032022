@@ -10,7 +10,7 @@ const result = dotenv.config();
 
 //const postsRoutes = require('./routes/posts');
 
-const Db = require('./db/db.js');
+//const Db = require('./db/db.js');
 
 /*Db.sync()
 .then(console.log('Connexion à la bdd OK'))

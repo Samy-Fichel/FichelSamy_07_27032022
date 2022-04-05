@@ -1,19 +1,19 @@
-"use strict";
-module.exports = function (sequelize, DataTypes) {
-  const Posts = sequelize.define("Posts", {
+const { Sequelize, DataTypes } = require('sequelize');
+
+  const Posts = Sequelize.define("Posts", {
+
     image: {
       type: DataTypes.STRING,
     },
     content: {
       type: DataTypes.STRING,
     },
-    user_id: {
-      type: DataTypes.STRING,
-    },
+    
   });
 
   Posts.associate = function (models) {
-    Posts.hasmany(models.User, {
+    console.log('essai');
+    Posts.hasMany(models.User, {
       as: "Users",
     });
     
@@ -25,5 +25,4 @@ module.exports = function (sequelize, DataTypes) {
     });
   };
 
-  return Posts;
-};
+ module.exports = Posts;
