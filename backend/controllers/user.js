@@ -5,6 +5,7 @@ const dbmodel = require('../models/user');
 const User = dbmodel.Users;
 
 
+
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10) //Fonction pour crypter un MDP 
         .then(hash => {
@@ -16,7 +17,7 @@ exports.signup = (req, res, next) => {
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
                 .catch(error => res.status(400).json({ error }));
         })
-        .catch(error => res.status(500).json({ error }));
+         .catch(error => res.status(500).json({ error }));
 };
 
 exports.login = (req, res, next) => {

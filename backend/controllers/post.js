@@ -13,10 +13,7 @@ exports.getAllPosts = (req, res, next) => {
         order: [
             ['createdAt', 'DESC']
         ],
-        include: [{
-            model: dbmodel.Users,
-            attributes: ['idUSERS']
-        }]
+        include: Users
     })
         .then(posts => {
             res.status(200).json(posts)

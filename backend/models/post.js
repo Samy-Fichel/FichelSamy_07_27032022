@@ -1,6 +1,8 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
+const sequelizedb = require('../db');
+const Usermodel = require('./user');
 
-  const Posts = Sequelize.define("Posts", {
+  const Posts = sequelizedb.define("Posts", {
 
     image: {
       type: DataTypes.STRING,
@@ -13,15 +15,8 @@ const { Sequelize, DataTypes } = require('sequelize');
 
   Posts.associate = function (models) {
     console.log('essai');
-    Posts.hasMany(models.User, {
-      as: "Users",
-    });
-    
-    Posts.belongsTo(models.User, {
-      as: "Users",
-      foreignKey: {
-        allowNull: false,
-      },
+    Posts.belongsTo(Usermodel, {
+      //as: "Users",
     });
   };
 

@@ -4,22 +4,22 @@ module.exports = function (sequelize, DataTypes) {
     content: {
       type: DataTypes.TEXT,
     },
-    post_id: {
-      allowNull: false,
-      type: DataTypes.INTEGER,
-      /*references: {
-        model: 'Posts',
-        key: 'POSTSid',
-      }*/
-    },
-    user_id: {
-      allowNull: false,
-      type: DataTypes.INTEGER,
-      /*references: {
-        model: 'User',
-        key: 'idUSERS',
-      }*/
-    }
+    // post_id: {
+    //   allowNull: false,
+    //   type: DataTypes.INTEGER,
+    //   /*references: {
+    //     model: 'Posts',
+    //     key: 'POSTSid',
+    //   }*/
+    // },
+    // user_id: {
+    //   allowNull: false,
+    //   type: DataTypes.INTEGER,
+    //   /*references: {
+    //     model: 'User',
+    //     key: 'idUSERS',
+    //   }*/
+    // }
   });
 
   Comments.associate = function (models) {

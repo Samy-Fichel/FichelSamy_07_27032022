@@ -1,11 +1,9 @@
+const { DataTypes } = require('sequelize');
+const sequelizedb = require('../db');
+const Postmodel = require('./post');
 
-"use strict";
-module.exports = (sequelize, DataTypes) => {
-  const Users = sequelize.define("Users", {
-    idUSERS: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
+
+  const Users = sequelizedb.define("Users", {
     email: {
       type: DataTypes.STRING,
     },
@@ -15,23 +13,12 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
     },
-    bio: {
-      type: DataTypes.STRING,
-    },
-
-    isAdmin: {
-      type: DataTypes.BOOLEAN,
-    },
   });
 
   Users.associate = function (models) {
-    Users.belongsToMany(models.Posts, {
-      as: "Posts",
-    });
-    Users.hasMany(models.Posts, {
+    Users.hasMany(Postmodel, {
       as: "Posts",
     });
   };
 
-  return Users;
-};
+module.exports = Users;
