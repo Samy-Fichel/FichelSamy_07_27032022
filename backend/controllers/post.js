@@ -1,23 +1,21 @@
 const fs = require('fs')
 const dbmodel = require('../models');
-const dbGroupoMania = require('//models');
+const Postmodel = require('../models/post');
+const Usermodel = require('../models/user');
+const Comments = require('../models/comment');
 
-const Users = dbmodel.Users;
-const Posts = dbmodel.Posts;
-const Comments = dbmodel.Comments;
-
-const { Post } = db.sequelize.models
 
 exports.getAllPosts = (req, res, next) => {
-    Post.findAll({
-        order: [
-            ['createdAt', 'DESC']
-        ],
-        include: Users
+    Postmodel.findAll({
+        // order: [
+        //     ['createdAt', 'DESC']
+        // ],
+        //include: Usermodel
     })
         .then(posts => {
+            console.log(posts);
             res.status(200).json(posts)
         })
-        .catch(() => res.status(500).json({ message: 'Aucun post trouvé' }));
+        .catch((erreur) => res.status(500).json({ message: erreur }));
 }
 

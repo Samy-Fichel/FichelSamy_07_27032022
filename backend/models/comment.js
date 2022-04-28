@@ -1,39 +1,24 @@
-'use strict';
-module.exports = function (sequelize, DataTypes) {
-  const Comments = sequelize.define("comments", {
-    content: {
-      type: DataTypes.TEXT,
-    },
-    // post_id: {
-    //   allowNull: false,
-    //   type: DataTypes.INTEGER,
-    //   /*references: {
-    //     model: 'Posts',
-    //     key: 'POSTSid',
-    //   }*/
-    // },
-    // user_id: {
-    //   allowNull: false,
-    //   type: DataTypes.INTEGER,
-    //   /*references: {
-    //     model: 'User',
-    //     key: 'idUSERS',
-    //   }*/
-    // }
+const { DataTypes } = require('sequelize');
+const sequelizedb = require('../db');
+
+
+const Comments = sequelizedb.define("Comments", {
+  content: {
+    type: DataTypes.TEXT,
+  },
+});
+
+Comments.associate = function (models) {
+  console.log('essai association comment user');
+  Comments.belongsTo(models.Users, {
+    as: "Users",
   });
 
-  Comments.associate = function (models) {
-    Comments.hasOne(models.Posts, {
-      as: "Posts",
-    });
-    
-    Comments.belongsTo(models.User, {
-      as: "Users",
-      foreignKey: {
-        allowNull: false,
-      },
-    }); 
-  };
-
-  return Comments;
+  Comments.belongsTo(models.Post, {
+    as: "Posts",
+  });
+  
 };
+
+
+module.exports = Comments;
