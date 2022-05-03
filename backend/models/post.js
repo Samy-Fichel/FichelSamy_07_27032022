@@ -14,9 +14,7 @@ const Posts = sequelizedb.define("Posts", {
 
 Posts.associate = function (models) {
   console.log('essai');
-  Posts.belongsTo(models.Users, {
-    as: "Users",
-  });
+  Posts.belongsTo(models.Users);
 };
 
 module.exports = Posts;

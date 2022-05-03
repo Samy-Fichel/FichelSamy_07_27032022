@@ -1,5 +1,4 @@
 const fs = require('fs')
-const dbmodel = require('../models');
 const Postmodel = require('../models/post');
 const Usermodel = require('../models/user');
 const Comments = require('../models/comment');
@@ -10,7 +9,7 @@ exports.getAllPosts = (req, res, next) => {
         // order: [
         //     ['createdAt', 'DESC']
         // ],
-        //include: Usermodel
+        include: Usermodel
     })
         .then(posts => {
             console.log(posts);

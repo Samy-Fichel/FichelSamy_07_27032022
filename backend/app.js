@@ -38,7 +38,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
     try {
       await sequelizedb.authenticate();
       console.log('Connection has been established successfully.');
-      await sequelizedb.sync({ force: true });
+    
       console.log("All models were synchronized successfully.");
 
       const models = {
@@ -50,8 +50,14 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
       Usermodel.associate(models);
       Commentmodel.associate(models);
 
-      const post1 = Postmodel.build({ content: "Bonjour je suis le contenu" });
+      await sequelizedb.sync({ force: true });
+
+      const user1 = Usermodel.build({email: "test@gmail.com", username:"test", password:"test01", });
+      await user1.save();
+
+      const post1 = Postmodel.build({ content: "Bonjour je suis le contenu", UserId: 1});
       await post1.save();
+    
 
     } catch (error) {
       console.error('Unable to connect to the database:', error);
