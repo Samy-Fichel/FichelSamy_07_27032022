@@ -1,12 +1,41 @@
+/* eslint-disable vue/no-multiple-template-root */
+
+<script>
+// import HelloWorldVue from "./components/HelloWorld.vue";
+// import TheMenu from "./components/TheMenu.vue";
+import TheAllPostView from "./views/AllPostView.vue";
+
+export default {
+  name: "App",
+  components: {
+    // HelloWorld: HelloWorldVue,
+    // TheMenu,
+    TheAllPostView
+  
+},
+};
+</script>
+
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+	<div id="app">
+  <TheAllPostView />
+  
+		<!-- <nav>
+			<TheMenu />
+			<a href="/about">À propos</a>
+			<a href="/contact">Contact</a>
+		</nav>
+		<p>Bienvenue sur notre page d'<TheMenu /></p>
+    <TheMenu />
+
+    <TheAllPost />
+
+    <HelloWorld colorText="red" name="Samy" image="https://larbredeaaz.fr/files/logo/logo.png" />
+    <HelloWorld colorText="green" name="Arthur" 
+      image="https://assets.letemps.ch/sites/default/files/styles/original/public/media/2020/08/16/file7bvv3g0v9rdyivvq9bw.jpg?itok=t7OLSXC_" /> -->
   </div>
 </template>
+
 
 <style lang="scss">
 #app {
