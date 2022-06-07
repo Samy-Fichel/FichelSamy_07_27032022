@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "Image-url",
+  name: "ImageUrl",
   props: {
     url: String,
   },
