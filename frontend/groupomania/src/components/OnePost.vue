@@ -39,10 +39,12 @@ export default {
 
 <template>
   <div class="container-card mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-
+  <div></div>
     <div class="userid">
       <p class="username-id">{{ UserId }}</p> 
-      <!-- <p>{{ id }}</p> -->
+    </div>
+       <div class="userid">
+      <p class="username-id">{{ createdAt }}</p> 
     </div>
   
     <div class="my-3 p-3 py-3">{{ content }}</div>
@@ -50,6 +52,8 @@ export default {
       <ImageUrl :url="image" class="img-onepost" />
     </div>
   </div>
+  
+  
 </template>
 
 <style scoped>
@@ -92,8 +96,8 @@ pb-3,
 }
 .username-id{
   background-color: gold;
-  width: 40px;
-  height: 40px;
+  width: 140px;
+  height: 25px;
   border-radius: 20px;
 }
 .userid{

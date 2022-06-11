@@ -1,13 +1,18 @@
 <template>
-  <span class="button">{{ label }}</span>
+  <button class="button" @click="onClick">{{ label }}</button>
 </template>
 
 <script>
 export default {
-  name: "Button-B",
+  name: "ButtonComponent",
   props: {
     label: String,
   },
+  methods: {
+    onClick() {
+      this.$emit('click-btn');
+    }
+  }
 };
 </script>
 
