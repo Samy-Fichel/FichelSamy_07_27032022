@@ -1,5 +1,5 @@
 <template>
-  <button class="button" @click="onClick">{{ label }}</button>
+  <button class="btn btn-secondary btn-lg" @click="onClick">{{ label }}</button>
 </template>
 
 <script>
@@ -17,9 +17,7 @@ export default {
 </script>
 
 <style scoped>
-.button {
-  padding: 5px;
-  background-color: #eeeeee;
-  border-radius: 4px;
+.btn {
+  margin: auto;
 }
 </style>

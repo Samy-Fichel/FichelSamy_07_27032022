@@ -2,6 +2,12 @@
     <!-- <h1>Bonjour AllPostView</h1> -->
     <div class="createpost">
       <!-- <label for="story">Tell us your story:</label> -->
+      <input type="file" accept="image/png, image/jpeg" class="" >
+      <ul>
+        <li v-for="allpostmsg in allpostmsgs.allpostmsgs" :key="allpostmsg.id">
+            {{allpostmsgs.content}}
+        </li>
+      </ul>
       <textarea id="story" name="story" rows="4" cols="63">
         Que voulez-vous dire, (nom) ? 
       </textarea>
@@ -13,6 +19,7 @@
 // import HeaderComponent from '../components/HeaderComponent.vue';
 // import OnePost from '../components/OnePost.vue';
 import ButtonComponent from '../components/ButtonComponent.vue';
+import axios from 'axios';
 
 export default {
   name: "CreatePost",
@@ -26,6 +33,25 @@ export default {
     onCreatePost(){
       alert("Nouveau Post créé");
     }
+  },
+  data() {
+    return {
+      allpostmsgs: [],
+      allpostmsg: {
+        id: null,
+        UserId: null,
+        content: null,
+        createdAt: null
+      }
+    }
+  },
+  mounted() {
+    axios.get('http://localhost:3000/get-all-posts')
+    .then(response => {
+      this.allpostmsgs = response.data;
+      console.log(this.allpostmsgs)
+    })
+    .catch(error => console.log(error));
   }
 };
 
@@ -36,7 +62,7 @@ export default {
 {
     display: flex;
     justify-content: center; 
-    background: blue;
+    background: #f2f2f5;
     margin-top: 2em;
     padding: 1em;
 }

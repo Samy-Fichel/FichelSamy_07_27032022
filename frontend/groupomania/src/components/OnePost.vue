@@ -1,7 +1,6 @@
 <script>
 import ImageUrl from './ImageUrl.vue';
 
-
 export default {
   name: "OnePost",
   components: {
@@ -34,6 +33,7 @@ export default {
     },
 
   },
+
 };
 </script>
 
