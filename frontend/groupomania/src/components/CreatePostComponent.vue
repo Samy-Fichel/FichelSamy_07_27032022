@@ -4,8 +4,9 @@
       <!-- <label for="story">Tell us your story:</label> -->
       <input type="file" accept="image/png, image/jpeg" class="" >
       <ul>
-        <li v-for="allpostmsg in allpostmsgs.allpostmsgs" :key="allpostmsg.id">
-            {{allpostmsgs.content}}
+        <li v-for="post in allpostmsgs" :key="post.id">
+            {{post.id}}
+            {{post.content}}
         </li>
       </ul>
       <textarea id="story" name="story" rows="4" cols="63">
@@ -36,23 +37,19 @@ export default {
   },
   data() {
     return {
-      allpostmsgs: [],
-      allpostmsg: {
-        id: null,
-        UserId: null,
-        content: null,
-        createdAt: null
-      }
+      allpostmsgs: "Toto",
     }
   },
   mounted() {
+    this.allpostmsgs = "Bonjour Samy"
     axios.get('http://localhost:3000/get-all-posts')
     .then(response => {
       this.allpostmsgs = response.data;
       console.log(this.allpostmsgs)
     })
     .catch(error => console.log(error));
-  }
+  },
+  
 };
 
 </script>
@@ -62,6 +59,7 @@ export default {
 {
     display: flex;
     justify-content: center; 
+    align-items: center;
     background: #f2f2f5;
     margin-top: 2em;
     padding: 1em;
