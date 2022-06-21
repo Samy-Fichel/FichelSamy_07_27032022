@@ -55,10 +55,10 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
       const user1 = Usermodel.build({email: "test@gmail.com", username:"test", password:"test01", });
       await user1.save();
 
-      const post1 = Postmodel.build({ content: "Bonjour je suis le contenu", UserId: 1});
+      const post1 = Postmodel.build({ image:"https://cdn.pixabay.com/photo/2022/02/20/13/56/red-throated-barbet-7024605_1280.jpg", content: "Bonjour je suis le contenu", UserId: 1});
       await post1.save();
 
-      const post2 = Postmodel.build({ content: "Bonjour je suis le contenu N°2", UserId: 1});
+      const post2 = Postmodel.build({ image:"https://cdn.pixabay.com/photo/2022/02/20/13/56/red-throated-barbet-7024605_1280.jpg", content: "Bonjour je suis le contenu N°2", UserId: 1});
       await post2.save();
     
     

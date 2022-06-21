@@ -3,12 +3,7 @@
     <div class="createpost">
       <!-- <label for="story">Tell us your story:</label> -->
       <input type="file" accept="image/png, image/jpeg" class="" >
-      <ul>
-        <li v-for="post in allpostmsgs" :key="post.id">
-            {{post.id}}
-            {{post.content}}
-        </li>
-      </ul>
+     
       <textarea id="story" name="story" rows="4" cols="63">
         Que voulez-vous dire, (nom) ? 
       </textarea>
@@ -20,7 +15,6 @@
 // import HeaderComponent from '../components/HeaderComponent.vue';
 // import OnePost from '../components/OnePost.vue';
 import ButtonComponent from '../components/ButtonComponent.vue';
-import axios from 'axios';
 
 export default {
   name: "CreatePost",
@@ -34,22 +28,8 @@ export default {
     onCreatePost(){
       alert("Nouveau Post créé");
     }
-  },
-  data() {
-    return {
-      allpostmsgs: "Toto",
-    }
-  },
-  mounted() {
-    this.allpostmsgs = "Bonjour Samy"
-    axios.get('http://localhost:3000/get-all-posts')
-    .then(response => {
-      this.allpostmsgs = response.data;
-      console.log(this.allpostmsgs)
-    })
-    .catch(error => console.log(error));
-  },
-  
+  }
+ 
 };
 
 </script>
