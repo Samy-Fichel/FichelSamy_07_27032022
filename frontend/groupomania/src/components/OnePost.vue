@@ -20,7 +20,7 @@ export default {
       required: false
     },
     createdAt: {
-      type: Date,
+      type: String,
       required: false
     },
     updatedAt: {

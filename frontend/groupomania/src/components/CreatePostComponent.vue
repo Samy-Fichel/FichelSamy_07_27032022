@@ -14,6 +14,7 @@
 <script>
 // import HeaderComponent from '../components/HeaderComponent.vue';
 // import OnePost from '../components/OnePost.vue';
+import { Axios } from 'axios';
 import ButtonComponent from '../components/ButtonComponent.vue';
 
 export default {
@@ -27,6 +28,17 @@ export default {
   methods:{
     onCreatePost(){
       alert("Nouveau Post créé");
+      Axios.post('http://localhost:3000/create', {
+        UserId: this.UserId,
+        content: this.content,
+        image: this.image,
+        createdAt: this.createdAt
+      })
+      .then(response => {
+      console.log(response);
+      this.$router.push('/create')
+    })
+    .catch(error => console.log(error));
     }
   }
  
