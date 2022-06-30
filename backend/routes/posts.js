@@ -1,11 +1,12 @@
 const express = require('express');
-const router = express.Router();
+const  router = express.Router();
+const auth = require('../middleware/auth');
 
 const postsCtrl = require('../controllers/post');
 
 
 
-router.get('/get-all-posts', postsCtrl.getAllPosts);
+router.get('/get-all-posts',  postsCtrl.getAllPosts);
 // router.get('/:id', postsCtrl.getOnePost);
 router.post('/create', postsCtrl.createPost);
 // router.put('/:id', postsCtrl.modifyPost);

@@ -26,7 +26,7 @@ export default {
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ms-auto">
 							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="#">S’identifier</a>
+								<a class="nav-link active" aria-current="page" href="../views/Signup.vue">S’identifier</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="#">S’inscrire</a>

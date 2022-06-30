@@ -1,7 +1,7 @@
 /* eslint-disable vue/no-multiple-template-root */
 
 <script>
-// import HelloWorldVue from "./components/HelloWorld.vue";
+//  import TheSignupView from "./views/SignupView.vue";
 // import TheMenu from "./components/TheMenu.vue";
 import TheAllPostView from "./views/AllPostView.vue";
 
@@ -10,8 +10,7 @@ export default {
   components: {
     // HelloWorld: HelloWorldVue,
     // TheMenu,
-    TheAllPostView
-  
+    TheAllPostView,
 },
 };
 </script>
@@ -19,7 +18,6 @@ export default {
 <template>
 	<div id="app">
   <TheAllPostView />
-  
 		<!-- <nav>
 			<TheMenu />
 			<a href="/about">À propos</a>

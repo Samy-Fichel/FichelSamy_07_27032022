@@ -17,7 +17,7 @@ const dotenv = require("dotenv");
 const result = dotenv.config();
 
 const postsRoutes = require('./routes/posts');
-
+const userRoutes = require('./routes/user');
 
 app.use(helmet());
 app.use(cors());
@@ -25,6 +25,7 @@ app.use(rateLimit);
 
 app.use(express.json());
 app.use (postsRoutes);
+app.use(userRoutes);
 
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
@@ -54,6 +55,9 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
       const user1 = Usermodel.build({email: "test@gmail.com", username:"test", password:"test01", });
       await user1.save();
+
+      const user2 = Usermodel.build({email: "samy@gmail.com", username:"samy", password:"Samyfich88", });
+      await user2.save();
 
       const post1 = Postmodel.build({ image:"https://cdn.pixabay.com/photo/2022/02/20/13/56/red-throated-barbet-7024605_1280.jpg", content: "Bonjour je suis le contenu", UserId: 1});
       await post1.save();
