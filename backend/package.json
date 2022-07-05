@@ -27,6 +27,10 @@
     "path": "^0.12.7",
     "sequelize": "^6.17.0",
     "sqlite3": "^5.0.2",
-    "vue-password-validator": "^0.1.8"
+    "vue-password-validator": "^0.1.8",
+    "vue-router": "^4.0.13"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-router": "~5.0.0"
   }
 }

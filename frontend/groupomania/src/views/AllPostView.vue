@@ -5,7 +5,6 @@
       <HeaderComponent />
     </div>
     <div>
-     
       <CreatePostComponent />
     </div>
      <ul>

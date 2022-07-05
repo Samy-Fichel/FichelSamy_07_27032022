@@ -53,10 +53,10 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
       await sequelizedb.sync({ force: true });
 
-      const user1 = Usermodel.build({email: "test@gmail.com", username:"test", password:"test01", });
+      const user1 = Usermodel.build({email: "Test@gmail.com", username:"test", password:"Test01", });
       await user1.save();
 
-      const user2 = Usermodel.build({email: "samy@gmail.com", username:"samy", password:"Samyfich88", });
+      const user2 = Usermodel.build({email: "Samy@gmail.com", username:"samy", password:"Samyfich88", });
       await user2.save();
 
       const post1 = Postmodel.build({ image:"https://cdn.pixabay.com/photo/2022/02/20/13/56/red-throated-barbet-7024605_1280.jpg", content: "Bonjour je suis le contenu", UserId: 1});

@@ -3,21 +3,22 @@
 <script>
 //  import TheSignupView from "./views/SignupView.vue";
 // import TheMenu from "./components/TheMenu.vue";
-import TheAllPostView from "./views/AllPostView.vue";
+// import TheAllPostView from "./views/AllPostView.vue";
 
-export default {
-  name: "App",
-  components: {
-    // HelloWorld: HelloWorldVue,
-    // TheMenu,
-    TheAllPostView,
-},
-};
+// export default {
+//   name: "App",
+//   components: {
+//     // HelloWorld: HelloWorldVue,
+//     // TheMenu,
+//     TheAllPostView,
+// },
+// };
 </script>
 
 <template>
 	<div id="app">
-  <TheAllPostView />
+  <router-view></router-view>
+  <!-- <TheAllPostView /> -->
 		<!-- <nav>
 			<TheMenu />
 			<a href="/about">À propos</a>
@@ -48,6 +49,7 @@ nav {
   padding: 30px;
 
   a {
+    text-decoration: none;
     font-weight: bold;
     color: #2c3e50;
 

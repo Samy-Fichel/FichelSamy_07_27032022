@@ -38,7 +38,7 @@ export default {
   props: {},
   methods: {
     onCrreateUser() {
-      alert("Nouveau Post créé");
+      alert("Nouveau compte créer");
     //   Axios.post("http://localhost:3000/create")
     //     .then((response) => {
     //       console.log(response);
