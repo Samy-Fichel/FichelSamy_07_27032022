@@ -12,13 +12,14 @@ exports.getAllPosts = (req, res, next) => {
         include: Usermodel
     })
         .then(posts => {
-            console.log(posts);
+            // console.log(posts);
             res.status(200).json(posts)
         })
         .catch((erreur) => res.status(500).json({ message: erreur }));
 };
 
 exports.createPost = (req, res, next) => {
+    console.log("req.body",req.body);
     const createpost = new Posts ({
         UserId: req.body.UserId,
         content: req.body.content,

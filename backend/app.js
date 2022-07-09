@@ -1,4 +1,7 @@
 const express = require('express');
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer();
 const app = express();
 /***** middleware ****************/
 const helmet = require("helmet");
@@ -22,7 +25,9 @@ const userRoutes = require('./routes/user');
 app.use(helmet());
 app.use(cors());
 app.use(rateLimit);
-
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(upload.array()); 
 app.use(express.json());
 app.use (postsRoutes);
 app.use(userRoutes);

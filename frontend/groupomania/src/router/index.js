@@ -34,7 +34,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  redirect: '/home',
+  // redirect: '/home',
   mode: 'history',
   path: '*',
   routes
