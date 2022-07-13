@@ -7,7 +7,7 @@ const UserModel = require('../models/user');
 
 
 exports.signup = (req, res, next) => {
-    console.log("signup");
+    console.log("signup", req.body.password);
     bcrypt.hash(req.body.password, 10) //Fonction pour crypter un MDP 
         .then(hash => {
             console.log("hash", hash);
@@ -21,7 +21,10 @@ exports.signup = (req, res, next) => {
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
                 .catch(error => res.status(500).json({ error }));
         })
-         .catch(error => res.status(500).json({ error }));
+         .catch(error => {
+            res.status(500).json({ error })
+            console.log("error", error);
+         });
 };
 
 

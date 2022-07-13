@@ -2,7 +2,7 @@
   <!-- <h1>Bonjour AllPostView</h1> -->
   <form class="createpost">
     <!-- <label for="story">Tell us your story:</label> -->
-    <input type="file" id="userfile" name="userfile" />
+    <input type="file" id="image" name="image" @change="OnFileSeletedImg"/>
     <!-- <input name="fileimg" type="file" accept="image/png, image/jpeg" class="" > -->
     <textarea
       id="post-textarea"
@@ -48,24 +48,26 @@ export default {
     id: null,
     image: "",
     createdAt: "",
-    SelectedImg: "",
     content: "",
   },
   methods: {
     OnFileSeletedImg(event) {
-      this.SelectedImg = event.target.files[0];
+      this.image = event.target.files[0];
+      
+      
     },
 
     onCreatePost() {
       console.log("content", this.content) 
       const formD = new FormData();
-      formD.append("content", this.content)
-      formD.append("image", this.OnFileSeletedImg)
-
+      //  formD.append("UserId", this.User.UserId)
+       formD.append("content", this.content)
+       formD.append("image", this.OnFileSeletedImg)
       axios
         .post("http://localhost:3000/create", formD, {
           headers: {
             "Content-Type": "multipart/form-data",
+            'Authorization': `Bearer ${this.$token}`
           },
         })
         .then((response) => {

@@ -16,16 +16,17 @@
       >
         <form style="width: 23rem">
           <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
-            Sign Up
+            Inscription
           </h3>
 
           <div class="form-outline mb-4">
             <input
               type="text"
-              id="fullname"
+              id="username"
               class="form-control form-control-lg"
+              v-model="username"
             />
-            <label class="form-label" for="fullname">Full Name</label>
+            <label class="form-label" for="fullname"> Nom d'Utilisateur</label>
           </div>
 
           <div class="form-outline mb-4">
@@ -33,8 +34,9 @@
               type="email"
               id="email"
               class="form-control form-control-lg"
+              v-model="email"
             />
-            <label class="form-label" for="email">Email address</label>
+            <label class="form-label" for="email">Adresse E-mail</label>
           </div>
 
           <div class="form-outline mb-4">
@@ -42,10 +44,14 @@
               type="password"
               id="password"
               class="form-control form-control-lg"
+              v-model="password"
             />
-            <label class="form-label" for="password">Password</label>
+            <label class="form-label" for="password"> Mot de passe</label>
           </div>
-
+        <div v-if="formError" class="formError">
+         pomme {{formError}}
+        </div>
+        
           <div class="pt-1 mb-4">
             <ButtonComponent
               label="S'inscrire"
@@ -55,8 +61,8 @@
           </div>
 
           <p class="forgot-password text-right">
-            Already registered
-            <router-link :to="{ name: 'login' }">sign in?</router-link>
+            Déjà enregistré
+             <router-link :to="{ name: 'login' }"> s'identifier ?</router-link>
           </p>
         </form>
       </div>
@@ -72,23 +78,55 @@
 <script>
 // import { Axios } from "axios";
 import ButtonComponent from "../components/ButtonComponent.vue";
+import axios from 'axios';
 
 export default {
-  name: "CreatePost",
+  name: "CreateUser",
   components: {
     ButtonComponent,
   },
   props: {},
+
+  data() {
+    return{
+       username: '',
+       email: '',  //fonction qui retourne un obj
+       password: '',
+       formError: null,
+    }
+   
+  },
+
   methods: {
-    onCrreateUser() {
+    onCreateUser: function() {
+      const User = {
+        "username": this.username,
+        "email": this.email,
+        "password": this.password,
+      }
+      console.log(User)
       alert("Nouveau compte créer");
-      //   Axios.post("http://localhost:3000/create")
-      //     .then((response) => {
-      //       console.log(response);
-      //       this.$router.push("/create");
-      //     })
-      //     .catch((error) => console.log(error));
+        axios.post("http://localhost:3000/signup", User, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            console.log(response);
+            console.log(User)
+            // this.$router.push("/signup");
+          })
+          .catch((error) => {
+            console.log(error);
+            this.formError = "Erreur: " + error.response.data.error;
+          });
+          
     },
   },
 };
 </script>
+<style scoped>
+.formError{
+  color: red;
+}
+</style>

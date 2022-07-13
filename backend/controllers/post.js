@@ -24,6 +24,7 @@ exports.createPost = (req, res, next) => {
         UserId: req.body.UserId,
         content: req.body.content,
         image: req.body.image,
+        image: `${req.protocol}://${req.get('host')}/images/${req.files['image']}`,
         createdAt: req.body.createdAt,
     });
     createpost.save()
