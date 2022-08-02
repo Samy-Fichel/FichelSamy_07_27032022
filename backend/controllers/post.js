@@ -23,10 +23,12 @@ exports.createPost = (req, res, next) => {
     const createpost = new Posts ({
         UserId: req.body.UserId,
         content: req.body.content,
-        image: req.body.image,
-        image: `${req.protocol}://${req.get('host')}/images/${req.files['image']}`,
         createdAt: req.body.createdAt,
+        // image: req.body.image,
+        image: `${req.protocol}://${req.get('host')}/images/${req.files['image']}`,
+        // image: req.body.content && req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`: null,
     });
+
     createpost.save()
     .then(() => res.status(201).json({message: "Nouveau post créer"}))
     .catch(error => res.status(500).json({error, message: "Il y a un probleme avec la création du post"}));

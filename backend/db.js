@@ -1,6 +1,7 @@
 //Ont instancie sequelize 
 const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
+require('dotenv').config();
 // Connexion à la database 
 // const sequelize = new Sequelize('projet7GP', 'root', 'Dev08a105-', {
 //     host: 'localhost',

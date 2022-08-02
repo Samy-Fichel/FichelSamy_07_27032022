@@ -8,6 +8,7 @@ const helmet = require("helmet");
 const path = require('path');
 const cors = require('cors');
 const rateLimit = require("./middleware/rate-limit");
+// const auth = require('./middleware/auth');
 /***** middleware ****************/
 /***** models sequelize ****************/
 const Postmodel = require("./models/post");
@@ -23,17 +24,28 @@ const postsRoutes = require('./routes/posts');
 const userRoutes = require('./routes/user');
 
 app.use(helmet());
-app.use(cors());
+// app.use(auth());
 app.use(rateLimit);
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  
+  next();
+});
+
 app.use(bodyParser.json()); 
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(upload.array()); 
 app.use(express.json());
-app.use (postsRoutes);
-app.use(userRoutes);
+app.use(cors());
+app.use ('/', postsRoutes);
+app.use('/', userRoutes);
 
 
-app.use('/images', express.static(path.join(__dirname, 'images')));
+
 
 /********************************************** ******************************/
 

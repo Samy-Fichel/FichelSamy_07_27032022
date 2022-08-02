@@ -1,6 +1,6 @@
 <template>
   <!-- <h1>Bonjour AllPostView</h1> -->
-  <form class="createpost">
+  <form class="createpost" enctype="multipart/form-data">
     <!-- <label for="story">Tell us your story:</label> -->
     <input type="file" id="image" name="image" @change="OnFileSeletedImg"/>
     <!-- <input name="fileimg" type="file" accept="image/png, image/jpeg" class="" > -->
@@ -40,20 +40,22 @@ export default {
   data() {
     return{
        content: 'test',  //fonction qui retourne un obj
+       selectedFile: null
     }
    
   },
   
   post: {
     id: null,
-    image: "",
     createdAt: "",
     content: "",
+    image: "", 
+    
   },
   methods: {
     OnFileSeletedImg(event) {
+      console.log(event);
       this.image = event.target.files[0];
-      
       
     },
 
@@ -61,13 +63,14 @@ export default {
       console.log("content", this.content) 
       const formD = new FormData();
       //  formD.append("UserId", this.User.UserId)
+       formD.append("image", this.OnFileSeletedImg,)
        formD.append("content", this.content)
-       formD.append("image", this.OnFileSeletedImg)
+
       axios
         .post("http://localhost:3000/create", formD, {
           headers: {
             "Content-Type": "multipart/form-data",
-            'Authorization': `Bearer ${this.$token}`
+            Authorization: `Bearer ${this.$token}`
           },
         })
         .then((response) => {

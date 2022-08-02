@@ -52,8 +52,8 @@ export default {
 
   data() {
     return{
-       email: '',  //fonction qui retourne un obj
-       password: '',
+       email: "",  //fonction qui retourne un obj
+       password: "",
     }
    
   },
@@ -65,15 +65,16 @@ export default {
         "password": this.password,
       }
       console.log(User)
-      alert("Vous êtes connectée");
-        axios.post("http://localhost:3000/login", {
+        axios.post("http://localhost:3000/login", User, {
           headers: {
             "Content-Type": "application/json",
           },
           body: User
         })
           .then((response) => {
+            localStorage.setItem("userId", response.data.UserId)
             console.log(response);
+            alert("Vous êtes connectée");
             console.log(User)
             // this.$router.push("/signup");
           })

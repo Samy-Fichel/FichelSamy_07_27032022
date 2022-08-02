@@ -1,6 +1,7 @@
 /* eslint-disable vue/no-multiple-template-root */
 
 <script>
+
 //  import TheSignupView from "./views/SignupView.vue";
 // import TheMenu from "./components/TheMenu.vue";
 // import TheAllPostView from "./views/AllPostView.vue";
@@ -34,7 +35,6 @@
       image="https://assets.letemps.ch/sites/default/files/styles/original/public/media/2020/08/16/file7bvv3g0v9rdyivvq9bw.jpg?itok=t7OLSXC_" /> -->
   </div>
 </template>
-
 
 <style lang="scss">
 #app {

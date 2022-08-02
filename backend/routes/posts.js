@@ -13,5 +13,5 @@ router.post('/create', postsCtrl.createPost);
 // router.delete('/:id', postsCtrl.deletePost);
 
 
-module.exports  = router;
+module.exports  = router; 
 
