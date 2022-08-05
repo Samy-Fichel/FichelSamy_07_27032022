@@ -40,7 +40,7 @@ export default {
   data() {
     return{
        content: 'test',  //fonction qui retourne un obj
-       selectedFile: null
+       image: ''
     }
    
   },
@@ -61,13 +61,19 @@ export default {
 
     onCreatePost() {
       console.log("content", this.content) 
+      console.log("image", this.image)
       const formD = new FormData();
-      //  formD.append("UserId", this.User.UserId)
-       formD.append("image", this.OnFileSeletedImg,)
+       if (this.image !== null){
+         //  formD.append("UserId", this.User.UserId)
+       formD.append("image", this.image)
        formD.append("content", this.content)
-
+       } else {
+          formD.append("content", this.content);
+          //  formD.append("UserId", this.User.UserId)
+       }
+     
       axios
-        .post("http://localhost:3000/create", formD, {
+        .post("http://localhost:3000/api/auth/post", formD, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${this.$token}`

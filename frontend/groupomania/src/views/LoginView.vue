@@ -13,12 +13,12 @@
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Connexion</h3>
 
             <div class="form-outline mb-4">
-              <input type="email" id="email" class="form-control form-control-lg" />
+              <input type="email" id="email" v-model="email" class="form-control form-control-lg" />
               <label class="form-label" for="password">Adresse E-Mail</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="password" class="form-control form-control-lg" />
+              <input type="password" id="password" v-model="password" class="form-control form-control-lg" />
               <label class="form-label" for="password">Mot de passe</label>
             </div>
 
@@ -52,8 +52,8 @@ export default {
 
   data() {
     return{
-       email: "",  //fonction qui retourne un obj
-       password: "",
+       email: '',  //fonction qui retourne un obj
+       password: '',
     }
    
   },
@@ -65,7 +65,7 @@ export default {
         "password": this.password,
       }
       console.log(User)
-        axios.post("http://localhost:3000/login", User, {
+        axios.post("http://localhost:3000/api/auth/login", User, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -76,7 +76,7 @@ export default {
             console.log(response);
             alert("Vous êtes connectée");
             console.log(User)
-            // this.$router.push("/signup");
+            this.$router.push("/");
           })
           .catch((error) => console.log(error));
     },

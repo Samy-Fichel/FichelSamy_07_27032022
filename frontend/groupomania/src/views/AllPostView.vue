@@ -38,13 +38,13 @@ export default {
  data() {
     return {
       allpostmsgs: "Toto",
-      content: "",
-      image: "",
+      // content: "",
+      // image: "",
     }
   },
   mounted() {
     this.allpostmsgs = "Bonjour Samy"
-    axios.get('http://localhost:3000/get-all-posts', {
+    axios.get('http://localhost:3000/api/auth/post', {
         headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${this.$token}`
@@ -57,7 +57,6 @@ export default {
     })
     .catch(error => console.log(error));
   },
-
 }
 </script>
 

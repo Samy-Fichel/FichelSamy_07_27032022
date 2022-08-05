@@ -1,7 +1,7 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 var multer = require('multer');
-var upload = multer();
+// var upload = multer();
 const app = express();
 /***** middleware ****************/
 const helmet = require("helmet");
@@ -38,12 +38,12 @@ app.use((req, res, next) => {
 app.use(bodyParser.json()); 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(upload.array()); 
+// app.use(upload.array()); 
 app.use(express.json());
 app.use(cors());
-app.use ('/', postsRoutes);
-app.use('/', userRoutes);
-
+app.use ('/api/auth/post', postsRoutes);
+app.use('/api/auth', userRoutes);
+// app.use('/api/auth', likeRoutes);
 
 
 

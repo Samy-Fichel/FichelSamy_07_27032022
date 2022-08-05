@@ -106,7 +106,7 @@ export default {
       }
       console.log(User)
       alert("Nouveau compte créer");
-        axios.post("http://localhost:3000/signup", User, {
+        axios.post("http://localhost:3000/api/auth/signup", User, {
           headers: {
             "Content-Type": "application/json",
           },

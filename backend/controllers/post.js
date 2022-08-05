@@ -24,8 +24,8 @@ exports.createPost = (req, res, next) => {
         UserId: req.body.UserId,
         content: req.body.content,
         createdAt: req.body.createdAt,
-        // image: req.body.image,
-        image: `${req.protocol}://${req.get('host')}/images/${req.files['image']}`,
+        image:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        // image: `${req.protocol}://${req.get('host')}/images/${req.files['image']}`,
         // image: req.body.content && req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`: null,
     });
 
