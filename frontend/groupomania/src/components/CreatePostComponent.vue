@@ -1,6 +1,6 @@
 <template>
   <!-- <h1>Bonjour AllPostView</h1> -->
-  <form class="createpost" enctype="multipart/form-data">
+  <form class="createpost" action="/images" method="POST" enctype="multipart/form-data">
     <!-- <label for="story">Tell us your story:</label> -->
     <input type="file" id="image" name="image" @change="OnFileSeletedImg"/>
     <!-- <input name="fileimg" type="file" accept="image/png, image/jpeg" class="" > -->

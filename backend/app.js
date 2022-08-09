@@ -22,18 +22,28 @@ const result = dotenv.config();
 
 const postsRoutes = require('./routes/posts');
 const userRoutes = require('./routes/user');
+const { Router } = require('express');
 
+
+
+
+
+
+
+
+ 
 app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" })); //permet de résoudre le probleme d'image 
 // app.use(auth());
 app.use(rateLimit);
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   
-  next();
-});
+//   next();
+// });
 
 app.use(bodyParser.json()); 
 app.use('/images', express.static(path.join(__dirname, 'images')));
@@ -45,7 +55,26 @@ app.use ('/api/auth/post', postsRoutes);
 app.use('/api/auth', userRoutes);
 // app.use('/api/auth', likeRoutes);
 
-
+// app.post('/images', (req, res) => {
+//   upload(req, res, (err) => {
+//     if(err){
+//       res.render('index', {
+//         msg: err
+//       });
+//     } else {
+//       if(req.file == undefined){
+//         res.render('index', {
+//           msg: 'Error: No File Selected!'
+//         });
+//       } else {
+//         res.render('index', {
+//           msg: 'File Uploaded!',
+//           file: `images/${req.file.filename}`
+//         });
+//       }
+//     }
+//   });
+// });
 
 /********************************************** ******************************/
 

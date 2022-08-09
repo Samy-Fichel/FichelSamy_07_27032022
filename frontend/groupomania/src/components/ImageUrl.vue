@@ -1,5 +1,5 @@
 <template>
-  <img :src="url" width="120" />
+  <img :src="url"  width="120" />
 </template>
 
 <script>
@@ -8,5 +8,7 @@ export default {
   props: {
     url: String,
   },
+
 };
+
 </script>

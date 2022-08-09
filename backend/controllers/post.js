@@ -1,8 +1,15 @@
-const fs = require('fs')
+const fs = require('fs');
+// const buffer = fs.readFileSync("path-to-image.jpg"); 
+// fs.writeFileSync("new-path.jpg", buffer);
+
+
+
+
 const Postmodel = require('../models/post');
 const Usermodel = require('../models/user');
 const Comments = require('../models/comment');
 const Posts = require('../models/post');
+
 
 exports.getAllPosts = (req, res, next) => {
     Postmodel.findAll({
