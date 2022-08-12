@@ -28,7 +28,6 @@
 // import OnePost from '../components/OnePost.vue';
 import axios from "axios";
 import ButtonComponent from "../components/ButtonComponent.vue";
-
 export default {
   name: "CreatePost",
   components: {
@@ -40,13 +39,15 @@ export default {
   data() {
     return{
        content: 'test',  //fonction qui retourne un obj
-       image: ''
+       image: '',
+       UserId: 2,
     }
    
   },
   
   post: {
     id: null,
+    UserId: null,
     createdAt: "",
     content: "",
     image: "", 
@@ -64,12 +65,12 @@ export default {
       console.log("image", this.image)
       const formD = new FormData();
        if (this.image !== null){
-         //  formD.append("UserId", this.User.UserId)
+       formD.append("UserId", this.UserId)
        formD.append("image", this.image)
        formD.append("content", this.content)
        } else {
           formD.append("content", this.content);
-          //  formD.append("UserId", this.User.UserId)
+          // formD.append("UserId", this.User.UserId)
        }
      
       axios

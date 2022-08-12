@@ -41,3 +41,13 @@ exports.createPost = (req, res, next) => {
     .catch(error => res.status(500).json({error, message: "Il y a un probleme avec la création du post"}));
 };
 
+exports.modifyPost = (req, res, next) => {
+    const postObject = req.file ?
+      {
+        ...JSON.parse(req.body),
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      } : { ...req.body };
+    Sauce.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
+      .then(() => res.status(200).json({ message: 'post modifié !' }))
+      .catch(error => res.status(400).json({ error }));
+  };

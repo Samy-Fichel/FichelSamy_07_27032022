@@ -72,11 +72,11 @@ export default {
           body: User
         })
           .then((response) => {
-            localStorage.setItem("userId", response.data.UserId)
-            console.log(response);
+            console.log("Je suis le token",response.data.token);
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
             alert("Vous êtes connectée");
             console.log(User)
-            this.$router.push("/");
+            this.$router.push("/home");
           })
           .catch((error) => console.log(error));
     },

@@ -3,8 +3,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
     try {
-        const token = req.headers['x-access-token'];
-        // const token = req.headers.x-access-token.split(' ')[1];
+        const token = req.headers.Authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, `${process.env.CLE_JSONWEBTOKEN}`);
         const userId = decodedToken.userId
         console.log('decodedToken', decodedToken)
