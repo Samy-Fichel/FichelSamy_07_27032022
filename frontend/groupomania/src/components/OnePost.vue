@@ -1,11 +1,14 @@
 <script>
 import ImageUrl from './ImageUrl.vue';
-
+import axios from "axios";
+import ButtonComponent from "../components/ButtonComponent.vue";
 export default {
   name: "OnePost",
   components: {
     ImageUrl,
-  },
+    ButtonComponent
+    
+},
   props: {
     id: {
       type: Number,
@@ -34,6 +37,24 @@ export default {
 
   },
 
+   methods: {
+    deletePost() {
+        const headers = { 
+           Authorization: `Bearer ${this.$token}`
+        }
+        const data = {
+          id: this.id
+        }
+        axios.delete(`http://localhost:3000/api/auth/post/:id` , {headers, data})
+             .then(response => {
+                 console.log(response);
+             })
+             .catch(function (error) {
+                console.log(error.response)
+             })
+    }
+},
+
 };
 </script>
 
@@ -52,6 +73,22 @@ export default {
     <div class=" card-post color-card box-shadow mx-auto">
       <ImageUrl :url="image" class="img-onepost" />
     </div>
+      <!-- <button class="btn btn-danger btn-sm" @click="deletePost">Delete</button> -->
+       <ButtonComponent
+      label="Delete"
+      name="Delete"
+      class="buttoncreatecomponent"
+      @click-btn="deletePost"
+    />
+     <!-- <button class="btn btn-danger btn-sm" @click="deletePost(post.id)">Delete</button> -->
+     <!-- <ButtonComponent class="" label="Delete" name="Delete" title="supprimer le post" @click="deletePost(post.id)"/> -->
+      <!-- <ButtonComponent
+      label="Delete"
+      name="Delete"
+      class="buttoncreatecomponent"
+      @click-btn="onDeletePost"
+    /> -->
+   
   </div>
 
 

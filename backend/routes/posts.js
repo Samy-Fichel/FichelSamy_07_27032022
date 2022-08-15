@@ -12,7 +12,7 @@ router.get('/', postsCtrl.getAllPosts);
 router.post('/', upload.single('image'), postsCtrl.createPost);
 
 router.put('/:id', postsCtrl.modifyPost);
-// router.delete('/:id', postsCtrl.deletePost);
+router.delete('/:id', postsCtrl.deletePost);
 
 
 module.exports  = router; 
