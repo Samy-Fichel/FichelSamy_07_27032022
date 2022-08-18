@@ -41,30 +41,122 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.modifyPost = (req, res, next) => {
-    const {id} = req.body
+    const {id} = req.params
     const {body} = req
+    // const filename = Posts.image;
+    // fs.unlink(`images/${filename}`, () => {
+    //     const updateImage = req.file ? {
+    //         image:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    //     } : {...req.body}
+  
     Posts.findByPk(id)
     .then(Posts => {
-        if(!Posts) return res.status(404).json({message: "erreur avec la modification du post"})
+        if(!Posts) return res.status(404).json({message: "erreur avec la modification du post test"})
 
         Posts.content = body.content
+        // Posts.image =  updateImage
+        // Posts.image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
         // Posts.image = body.image
-        Posts.save()
+        Posts.save() //method asyn save 
         .then(() => res.status(201).json({message: "Modification du post OK"}))
         .catch((error) => res.status(500).json(error)); 
     })
-    .catch((error) => res.status(500).json(error)); 
+//})
+//     .catch((error) => res.status(500).json(error)); 
 };
 
 exports.deletePost = (req, res, next) => {
     const {id} = req.body
+    // const filename = Posts.image.destroy('/images/')[1];
+    // fs.unlink(`images/${filename}`, () => {
+    //     Posts.deleteOne({ _id: req.params.id })
+    //       .then(() => res.status(200).json({ message: 'Objet supprimé ! ' }))
+    //       .catch(error => res.status(400).json({ error }));
+    //   }); // unlink pour supprimer un fichier et deuxième argument le callback 
     Posts.destroy({where : {id : id} })
-    .then(ressource => {
-        if (ressource == 0) return res.status(404).json({msg: 'erreur suppression du post'})
+    .then(ressourceId => {
+        if (ressourceId == 0) return res.status(404).json({msg: 'erreur suppression du post'})
         res.status(200).json({msg: "Post supprimé"})
     })
     .catch((error) => res.status(500).json(error));
 };
+
+
+exports.likePosts = async (req, res, next) => {
+    console.log(req.body.like, 'like');
+    console.log(req.body.UserId, 'UserId');
+    console.log(req.params.id);
+  
+    //Si Sauce = null on renvoie une erreur 404 
+    const post = await Posts.findOne({ _id: req.body.id })
+    console.log(post);
+    //mise en place d'un switch case pour le système de like/dislike
+    switch (req.body.like) {
+      case 1:
+        //mise à jour objet BDD
+        if (!post.usersLiked.includes(req.body.UserId)) {
+          Posts.updateOne(
+            { _id: req.params.id },
+            {
+              $inc: { likes: 1 },
+              $push: { usersLiked: req.body.UserId },
+            }
+          )
+            .then(() => res.status(201).json({ message: "like +1" }))
+            .catch((error) => res.status(400).json({ error }));
+        }
+        break;
+  
+      case -1: //like = -1 (dislikes = +1)
+        //mise à jour objet BDD
+        if (!post.usersDisliked.includes(req.body.UserId)) {
+          Posts.updateOne(
+            { _id: req.params.id },
+            {
+              $inc: { dislikes: 1 },
+              $push: { usersDisliked: req.body.UserId },
+            }
+          )
+            .then(() => res.status(201).json({ message: "dislike +1" }))
+            .catch((error) => res.status(400).json({ error }));
+        }
+        break;
+  
+      case 0:
+        if (post.usersLiked.includes(req.body.UserId)) {
+          //mise à jour objet BDD
+          Posts.updateOne(
+            { _id: req.params.id },
+            {
+              $inc: { likes: -1 },
+              $pull: { usersLiked: req.body.UserId },
+            }
+          )
+            .then(() => res.status(201).json({ message: "like 0" }))
+            .catch((error) => res.status(400).json({ error }));
+        }
+  
+        //Après un like = -1 mettre un like = 0 (likes = 0)
+        if (post.usersDisliked.includes(req.body.UserId)) {
+          //mise à jour objet BDD
+          Posts.updateOne(
+            { _id: req.params.id },
+            {
+              $inc: { dislikes: -1 },
+              $pull: { usersDisliked: req.body.UserId },
+            }
+          )
+            .then(() => res.status(201).json({ message: "dislike 0" }))
+            .catch((error) => res.status(400).json({ error }));
+        }
+        break;
+    }
+  
+  };
+
+
+
+
 
 
 
