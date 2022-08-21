@@ -51,7 +51,6 @@ export default {
     createdAt: "",
     content: "",
     image: "", 
-    
   },
   methods: {
     OnFileSeletedImg(event) {

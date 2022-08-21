@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const Postmodel = require('../models/post');
 const Usermodel = require('../models/user');
-const Comments = require('../models/comment');
+const Like = require('../models/like');
 const Posts = require('../models/post');
 const { post, resource, response } = require('../app');
 
@@ -15,7 +15,7 @@ exports.getAllPosts = (req, res, next) => {
         // order: [
         //     ['createdAt', 'DESC']
         // ],
-        include: Usermodel
+        include: Usermodel, Like
     })
         .then(posts => {
             // console.log(posts);
@@ -57,8 +57,8 @@ exports.modifyPost = (req, res, next) => {
         // Posts.image =  updateImage
         // Posts.image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
         // Posts.image = body.image
-        Posts.save() //method asyn save 
-        .then(() => res.status(201).json({message: "Modification du post OK"}))
+        Posts.save({where : {id: id} }) //method asyn save 
+        .then(() => res.status(200).json({message: "Modification du post OK"}))
         .catch((error) => res.status(500).json(error)); 
     })
 //})
@@ -66,7 +66,7 @@ exports.modifyPost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-    const {id} = req.body
+    const {id} = req.params
     // const filename = Posts.image.destroy('/images/')[1];
     // fs.unlink(`images/${filename}`, () => {
     //     Posts.deleteOne({ _id: req.params.id })
@@ -81,22 +81,21 @@ exports.deletePost = (req, res, next) => {
     .catch((error) => res.status(500).json(error));
 };
 
-
-exports.likePosts = async (req, res, next) => {
+exports.likePosts = (req, res, next) => {
     console.log(req.body.like, 'like');
     console.log(req.body.UserId, 'UserId');
     console.log(req.params.id);
-  
-    //Si Sauce = null on renvoie une erreur 404 
-    const post = await Posts.findOne({ _id: req.body.id })
+    const {id} = req.params
+    //Si post = null on renvoie une erreur 404 
+    const post = Posts.findOne({ id: id })
     console.log(post);
     //mise en place d'un switch case pour le système de like/dislike
     switch (req.body.like) {
       case 1:
         //mise à jour objet BDD
-        if (!post.usersLiked.includes(req.body.UserId)) {
+        if (!post.usersLiked.includes({where : {idUser : req.body.UserId} })) {
           Posts.updateOne(
-            { _id: req.params.id },
+            { id: id },
             {
               $inc: { likes: 1 },
               $push: { usersLiked: req.body.UserId },
@@ -107,26 +106,11 @@ exports.likePosts = async (req, res, next) => {
         }
         break;
   
-      case -1: //like = -1 (dislikes = +1)
-        //mise à jour objet BDD
-        if (!post.usersDisliked.includes(req.body.UserId)) {
-          Posts.updateOne(
-            { _id: req.params.id },
-            {
-              $inc: { dislikes: 1 },
-              $push: { usersDisliked: req.body.UserId },
-            }
-          )
-            .then(() => res.status(201).json({ message: "dislike +1" }))
-            .catch((error) => res.status(400).json({ error }));
-        }
-        break;
-  
       case 0:
-        if (post.usersLiked.includes(req.body.UserId)) {
+        if (post.usersLiked.includes({where: {idUser : req.body.UserId} })) {
           //mise à jour objet BDD
           Posts.updateOne(
-            { _id: req.params.id },
+            { id: id },
             {
               $inc: { likes: -1 },
               $pull: { usersLiked: req.body.UserId },
@@ -135,25 +119,8 @@ exports.likePosts = async (req, res, next) => {
             .then(() => res.status(201).json({ message: "like 0" }))
             .catch((error) => res.status(400).json({ error }));
         }
-  
-        //Après un like = -1 mettre un like = 0 (likes = 0)
-        if (post.usersDisliked.includes(req.body.UserId)) {
-          //mise à jour objet BDD
-          Posts.updateOne(
-            { _id: req.params.id },
-            {
-              $inc: { dislikes: -1 },
-              $pull: { usersDisliked: req.body.UserId },
-            }
-          )
-            .then(() => res.status(201).json({ message: "dislike 0" }))
-            .catch((error) => res.status(400).json({ error }));
-        }
-        break;
     }
-  
   };
-
 
 
 

@@ -13,7 +13,7 @@ const rateLimit = require("./middleware/rate-limit");
 /***** models sequelize ****************/
 const Postmodel = require("./models/post");
 const Usermodel = require('./models/user');
-const Commentmodel = require('./models/comment');
+const Likemodel = require('./models/like');
 /***** models sequelize ****************/
 const sequelizedb = require('./db');
 //Importation du package pour utiliser les variables d'environnement .env
@@ -91,11 +91,11 @@ app.use('/api/auth', userRoutes);
       const models = {
         Post: Postmodel,
         Users : Usermodel,
-        Comments: Commentmodel
+        Like: Likemodel
       }
       Postmodel.associate(models);
       Usermodel.associate(models);
-      Commentmodel.associate(models);
+      Likemodel.associate(models);
 
       await sequelizedb.sync({ force: true });
 

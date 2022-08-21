@@ -18,7 +18,6 @@
 <template>
   <html>
   <div id="app">
-      
         <router-view></router-view>
         <!-- <TheAllPostView /> -->
         <!-- <nav>
