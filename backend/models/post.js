@@ -9,6 +9,9 @@ const Posts = sequelizedb.define("Posts", {
   content: {
     type: DataTypes.STRING,
   },
+  usersLiked: { 
+    type: DataTypes.STRING, required: false, default: [] 
+  },
 
 });
 

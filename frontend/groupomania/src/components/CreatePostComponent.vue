@@ -40,7 +40,7 @@ export default {
     return{
        content: 'test',  //fonction qui retourne un obj
        image: '',
-       UserId: 2,
+       UserId: 3,
     }
    
   },
@@ -76,7 +76,7 @@ export default {
         .post("http://localhost:3000/api/auth/post", formD, {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${this.$token}`
+            // Authorization: `Bearer ${this.$token}`
           },
         })
         .then((response) => {

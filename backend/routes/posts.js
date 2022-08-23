@@ -12,7 +12,7 @@ router.get('/', postsCtrl.getAllPosts);
 router.post('/', upload.single('image'), postsCtrl.createPost);
 
 router.put('/:id', upload.single('image'), postsCtrl.modifyPost);
-router.delete('/:id',postsCtrl.deletePost);
+router.delete('/:id', postsCtrl.deletePost);
 router.post('/:id/like', postsCtrl.likePosts);
 
 module.exports  = router; 

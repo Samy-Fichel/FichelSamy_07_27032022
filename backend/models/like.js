@@ -6,9 +6,9 @@ const Like = sequelizedb.define("Like", {
   likes: {
     type: DataTypes.INTEGER,
   },
-  usersLiked: { 
-    type: DataTypes.STRING, required: false, default: [] 
-  }
+  // usersLiked: { 
+  //   type: DataTypes.STRING, required: false, default: [] 
+  // }
   
 });
 

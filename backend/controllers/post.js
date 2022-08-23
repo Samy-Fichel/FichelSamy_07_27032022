@@ -42,17 +42,17 @@ exports.createPost = (req, res, next) => {
 
 exports.modifyPost = (req, res, next) => {
     const {id} = req.params
+    const UserId  = req.param.UserId
     const {body} = req
     // const filename = Posts.image;
     // fs.unlink(`images/${filename}`, () => {
     //     const updateImage = req.file ? {
     //         image:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     //     } : {...req.body}
-  
     Posts.findByPk(id)
     .then(Posts => {
         if(!Posts) return res.status(404).json({message: "erreur avec la modification du post test"})
-
+    
         Posts.content = body.content
         // Posts.image =  updateImage
         // Posts.image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
@@ -67,6 +67,10 @@ exports.modifyPost = (req, res, next) => {
 
 exports.deletePost = (req, res, next) => {
     const {id} = req.params
+    // Posts.findByPk(id)
+    // .then (Posts => {
+    //   if(Posts.UserId !== req.UserId) return res.status(404).json({msg: 'erreur userid delete'})
+    //   res.status(200).json({msg: "UserId du post trouvé "})
     // const filename = Posts.image.destroy('/images/')[1];
     // fs.unlink(`images/${filename}`, () => {
     //     Posts.deleteOne({ _id: req.params.id })
@@ -79,7 +83,8 @@ exports.deletePost = (req, res, next) => {
         res.status(200).json({msg: "Post supprimé"})
     })
     .catch((error) => res.status(500).json(error));
-};
+  }
+
 
 exports.likePosts = (req, res, next) => {
     console.log(req.body.like, 'like');
