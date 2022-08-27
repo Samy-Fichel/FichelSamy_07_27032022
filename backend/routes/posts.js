@@ -7,12 +7,12 @@ const upload = multer({ dest: './images' })
 const postsCtrl = require('../controllers/post');
 
 
-router.get('/', postsCtrl.getAllPosts);  
+router.get('/', auth, postsCtrl.getAllPosts);  
 // router.get('/:id', postsCtrl.getOnePost);
-router.post('/', upload.single('image'), postsCtrl.createPost);
+router.post('/', auth, upload.single('image'), postsCtrl.createPost);
 
-router.put('/:id', upload.single('image'), postsCtrl.modifyPost);
-router.delete('/:id', postsCtrl.deletePost);
-router.post('/:id/like', postsCtrl.likePosts);
+router.put('/:id', auth, upload.single('image'), postsCtrl.modifyPost);
+router.delete('/:id',  auth, postsCtrl.deletePost);
+router.post('/:id/like', auth, postsCtrl.likePosts);
 
 module.exports  = router; 

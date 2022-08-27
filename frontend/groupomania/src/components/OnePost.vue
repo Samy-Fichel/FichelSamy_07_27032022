@@ -59,6 +59,7 @@ export default {
         })
     },
     modifyPost() {
+      console.log("this.id", this.id)
       const headers = {
         "Content-Type": "multipart/form-data",
       }
@@ -74,6 +75,7 @@ export default {
           console.log(error.response)
         })
     },
+
     likePost() {
       // const headers = {
       //   "Content-Type": "multipart/form-data",
@@ -95,12 +97,6 @@ export default {
 </script>
 
 <template>
-  <html>
-
-  <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  </head>
   <div class="container-card mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
     <div class="name-card-user-created">
       <div class="userid">
@@ -108,6 +104,9 @@ export default {
       </div>
       <div class="userid">
         <p class="username-id">{{ createdAt }}</p>
+      </div>
+      <div>
+       <p>{{this.id}}</p>
       </div>
     </div>
 
@@ -148,16 +147,11 @@ export default {
       </div>
       <div class="card-icons">
         <div class="like-container">
-          <input type="checkbox" />
-          <label> 
-            <i class="fa-solid fa-heart"></i>
-          </label>
+             <font-awesome-icon icon="fa-solid fa-user-secret"></font-awesome-icon>
         </div>
       </div>
     </div>
 </div>
-
-  </html>
 
 </template>
 

@@ -47,6 +47,7 @@ export default {
     axios.get('http://localhost:3000/api/auth/post', {
         headers: {
             "Content-Type": "multipart/form-data",
+            // 'Authorization': `Bearer ${this.token}`
           },
     })
     

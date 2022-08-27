@@ -12,6 +12,10 @@ const Users = sequelizedb.define("Users", {
   password: {
     type: DataTypes.STRING,
   },
+  isAdmin: {
+    type: DataTypes.BOOLEAN,
+  },
+  
 });
 
 Users.associate = function (models) {

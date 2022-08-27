@@ -40,6 +40,8 @@ exports.createPost = (req, res, next) => {
     .catch(error => res.status(500).json({error, message: "Il y a un probleme avec la création du post"}));
 };
 
+
+
 exports.modifyPost = (req, res, next) => {
     const {id} = req.params
     const UserId  = req.param.UserId
@@ -67,9 +69,11 @@ exports.modifyPost = (req, res, next) => {
 
 exports.deletePost = (req, res, next) => {
     const {id} = req.params
-    // Posts.findByPk(id)
+
+    // req.tokenUserid = userId
+    // Posts.findByPk(tokenUserid)
     // .then (Posts => {
-    //   if(Posts.UserId !== req.UserId) return res.status(404).json({msg: 'erreur userid delete'})
+    //   if(Posts.userId !== req.userId) return res.status(404).json({msg: 'erreur userid delete'})
     //   res.status(200).json({msg: "UserId du post trouvé "})
     // const filename = Posts.image.destroy('/images/')[1];
     // fs.unlink(`images/${filename}`, () => {
@@ -77,56 +81,90 @@ exports.deletePost = (req, res, next) => {
     //       .then(() => res.status(200).json({ message: 'Objet supprimé ! ' }))
     //       .catch(error => res.status(400).json({ error }));
     //   }); // unlink pour supprimer un fichier et deuxième argument le callback 
+
+   
+      try {
+        const post = post.findById(req.params.id)
+        const User = User.findById(req.auth.userId)
+    
+        if (post.UserId.toString() !== req.auth.userId) {
+          return response.status(401).json({msg: "Unhauthorized UserVerify"})
+        }
+        next()
+      } catch {
+        response.status(401).json({msg: 'Suppresion ou modification unauthorized'})
+      }
     Posts.destroy({where : {id : id} })
     .then(ressourceId => {
         if (ressourceId == 0) return res.status(404).json({msg: 'erreur suppression du post'})
         res.status(200).json({msg: "Post supprimé"})
     })
+  // })
     .catch((error) => res.status(500).json(error));
   }
 
-
-exports.likePosts = (req, res, next) => {
-    console.log(req.body.like, 'like');
-    console.log(req.body.UserId, 'UserId');
-    console.log(req.params.id);
-    const {id} = req.params
-    //Si post = null on renvoie une erreur 404 
-    const post = Posts.findOne({ id: id })
-    console.log(post);
-    //mise en place d'un switch case pour le système de like/dislike
-    switch (req.body.like) {
-      case 1:
-        //mise à jour objet BDD
-        if (!post.usersLiked.includes({where : {idUser : req.body.UserId} })) {
-          Posts.updateOne(
-            { id: id },
-            {
-              $inc: { likes: 1 },
-              $push: { usersLiked: req.body.UserId },
-            }
-          )
-            .then(() => res.status(201).json({ message: "like +1" }))
-            .catch((error) => res.status(400).json({ error }));
-        }
-        break;
-  
-      case 0:
-        if (post.usersLiked.includes({where: {idUser : req.body.UserId} })) {
-          //mise à jour objet BDD
-          Posts.updateOne(
-            { id: id },
-            {
-              $inc: { likes: -1 },
-              $pull: { usersLiked: req.body.UserId },
-            }
-          )
-            .then(() => res.status(201).json({ message: "like 0" }))
-            .catch((error) => res.status(400).json({ error }));
-        }
+  exports.likePosts = (req, res, next) => {
+    try {
+      console.log(req.body);
+      // const post = await 
+      //if( )
+      Like.create({
+        like: req.body.like,
+        UserId: req.body.UserId,
+        PostId: req.body.PostId   
+      })
+      .then(postLike => {
+        console.log("Like +1 (OK)");
+        res.status(201).json(postLike);
+      })
+      .catch(error => res.status(400).json(error))
+    } catch {
+      error => res.status(500).json(error);
     }
   };
 
+  
+
+// exports.likePosts = async (req, res, next) => {
+//     console.log(req.body.like, 'like');
+//     console.log(req.body.UserId, 'UserId');
+//     console.log(req.params.id);
+//     const {id} = req.params
+//     //Si post = null on renvoie une erreur 404 
+//     const post = await Posts.findOne({ id: id })
+//     console.log(post);
+//     //mise en place d'un switch case pour le système de like/dislike
+//     switch (req.body.like) {
+//       case 1:
+//         //mise à jour objet BDD
+//         if (!post.req.body.userId && res.body.like === 1) {
+//           Posts.updateOne(
+//             { id: id },
+//             {
+//               $inc: { likes: 1 },
+//               $push: { usersLiked: req.body.userId },
+//             }
+//           )
+//             .then(() => res.status(201).json({ message: "like +1" }))
+//             .catch((error) => res.status(400).json({ error }));
+//         }
+//         break;
+  
+//       case 0:
+//         if (post.req.body.userId && res.body.like === -1) {
+//           //mise à jour objet BDD
+//           Posts.updateOne(
+//             { id: id },
+//             {
+//               $inc: { likes: -1 },
+//               $pull: { usersLiked: req.body.userId },
+//             }
+//           )
+//             .then(() => res.status(201).json({ message: "like 0" }))
+//             .catch((error) => res.status(400).json({ error }));
+//         }
+//     }
+//   };
 
 
 

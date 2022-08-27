@@ -44,8 +44,11 @@ exports.login = (req, res, next) => {
                     }
                     res.status(200).json({
                         userId: user._id,
+                        adminUser: user.isAdmin,
                         token: jwt.sign(  // données à encoder dans ce token (payload)
-                            { userId: user.id },
+                            { userId: user.id,
+                              isAdmin: user.isAdmin
+                            },
                             `${process.env.CLE_JSONWEBTOKEN}`,
                             { expiresIn: '24h' } // le token expire au bout de 24h au dessus il ne sera plus considéré comme valable
                         )
