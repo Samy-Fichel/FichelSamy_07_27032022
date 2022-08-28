@@ -87,7 +87,7 @@ exports.deletePost = (req, res, next) => {
         const post = post.findById(req.params.id)
         const User = User.findById(req.auth.userId)
     
-        if (post.UserId.toString() !== req.auth.userId) {
+        if (post.UserId.toString() !== req.auth.UserId) {
           return response.status(401).json({msg: "Unhauthorized UserVerify"})
         }
         next()
@@ -101,7 +101,7 @@ exports.deletePost = (req, res, next) => {
     })
   // })
     .catch((error) => res.status(500).json(error));
-  }
+  };
 
   exports.likePosts = (req, res, next) => {
     try {

@@ -3,6 +3,8 @@ const { post } = require('../app');
 const Post = require('../models/post');
 const User = require('../models/user');
 // const dotenv = require('dotenv').config();
+const maxAge = 3 * 24 * 60 * 60 * 1000;
+
 
 module.exports = (req, res, next) => {
     try {

@@ -120,6 +120,12 @@ export default {
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Modify
     </button>
+    <div class="heart-post">
+      <i
+        class="fas fa-heart fa-2x me-3 pt-5 mt-xl-4"
+        style="color: #709085"
+      ></i>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -145,13 +151,8 @@ export default {
           </div>
         </div>
       </div>
-      <div class="card-icons">
-        <div class="like-container">
-             <font-awesome-icon icon="fa-solid fa-user-secret"></font-awesome-icon>
-        </div>
       </div>
     </div>
-</div>
 
 </template>
 
