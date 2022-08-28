@@ -16,6 +16,7 @@ const Posts = sequelizedb.define("Posts", {
 Posts.associate = function (models) {
   console.log('essai');
   Posts.belongsTo(models.Users);
+
   
 };
 

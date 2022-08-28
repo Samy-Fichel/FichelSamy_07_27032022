@@ -19,8 +19,9 @@ export default {
       required: false
     },
     //*********************************START LIKES
-    likes: {
-      type: Number, required: false, default: 0
+    like: {
+      type: Number,
+      required: false 
     },
     //************************************END LIKES
     content: {
@@ -42,7 +43,10 @@ export default {
   },
   data() {
     return {
-      newcontent: this.content
+      newcontent: this.content,
+      likeOnePost: this.like,
+      userIdLike: this.UserId,
+      postIdLike: this.PostId
     }
   },
   methods: {
@@ -81,7 +85,9 @@ export default {
       //   "Content-Type": "multipart/form-data",
       // }
       const data = {
-        like: this.req.body.like,
+        like: this.likeOnePost,
+        userIdLike: this.UserId,
+        postIdLike: this.PostId
         // image: this.image[0]
       }
       axios.post(`http://localhost:3000/api/auth/post/${this.id}/like`, data,)
@@ -120,11 +126,8 @@ export default {
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Modify
     </button>
-    <div class="heart-post">
-      <i
-        class="fas fa-heart fa-2x me-3 pt-5 mt-xl-4"
-        style="color: #709085"
-      ></i>
+    <div class="like-post-container">
+        <ButtonComponent label="" name="Modify" v-model="likeOnePost" class="buttoncreatecomponent fas fa-heart fa-2x me-3 pt-5 mt-xl-4" @click-btn="likePost" />
     </div>
 
     <!-- Modal -->
@@ -147,7 +150,7 @@ export default {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <ButtonComponent label="Modify" name="Modify" class="buttoncreatecomponent" @click-btn="modifyPost" />
+            <ButtonComponent label="Modify" v-model="newcontent" name="Modify" class="buttoncreatecomponent" @click-btn="modifyPost" />
           </div>
         </div>
       </div>

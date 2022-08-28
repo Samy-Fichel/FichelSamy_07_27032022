@@ -123,7 +123,23 @@ exports.deletePost = (req, res, next) => {
     }
   };
 
-  
+//  exports.recupLike = (req, res) => {
+//   const {id} = req.params
+//   try{
+//     Like.findAll({
+//       where: {
+//         PostId: id
+//       },
+//       include: req.body.UserId
+//     })
+//     .then (Like =>{
+//       res.status(201).json(Like)
+//     })
+//     .catch(error => res.status(400).json(error))
+//   } catch {
+//     error => res.status(500).json(error)
+//   }
+//  };
 
 // exports.likePosts = async (req, res, next) => {
 //     console.log(req.body.like, 'like');
