@@ -44,9 +44,9 @@ export default {
   data() {
     return {
       newcontent: this.content,
-      likeOnePost: this.like,
-      userIdLike: this.UserId,
-      postIdLike: this.PostId
+      likeOnePost: this.body.like,
+      // userIdLike: this.id.like,
+      // postIdLike: this.PostId
     }
   },
   methods: {
@@ -127,7 +127,7 @@ export default {
       Modify
     </button>
     <div class="like-post-container">
-        <ButtonComponent label="" name="Modify" v-model="likeOnePost" class="buttoncreatecomponent fas fa-heart fa-2x me-3 pt-5 mt-xl-4" @click-btn="likePost" />
+        <ButtonComponent label="" name="Modify" class="buttoncreatecomponent fas fa-heart fa-2x me-3 pt-5 mt-xl-4" @click-btn="likePost" />
     </div>
 
     <!-- Modal -->
