@@ -21,7 +21,8 @@ export default {
     //*********************************START LIKES
     like: {
       type: Number,
-      required: false 
+      required: false,
+      referenceKey: "like_id",
     },
     //************************************END LIKES
     content: {
@@ -44,9 +45,9 @@ export default {
   data() {
     return {
       newcontent: this.content,
-      likeOnePost: this.body.like,
-      // userIdLike: this.id.like,
-      // postIdLike: this.PostId
+      likeOnePost: this.like,
+      userIdLike: this.UserId,
+      postIdLike: this.PostsId
     }
   },
   methods: {
@@ -85,9 +86,9 @@ export default {
       //   "Content-Type": "multipart/form-data",
       // }
       const data = {
-        like: this.likeOnePost,
-        userIdLike: this.UserId,
-        postIdLike: this.PostId
+        like: 1,
+        userIdLike: 1,
+        postIdLike: 1
         // image: this.image[0]
       }
       axios.post(`http://localhost:3000/api/auth/post/${this.id}/like`, data,)
@@ -127,7 +128,7 @@ export default {
       Modify
     </button>
     <div class="like-post-container">
-        <ButtonComponent label="" name="Modify" class="buttoncreatecomponent fas fa-heart fa-2x me-3 pt-5 mt-xl-4" @click-btn="likePost" />
+        <ButtonComponent label="" name="like" v-model="likeOnePost" class="buttoncreatecomponent fas fa-heart fa-2x me-3 pt-5 mt-xl-4" @click-btn="likePost" />
     </div>
 
     <!-- Modal -->

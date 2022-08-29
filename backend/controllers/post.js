@@ -109,7 +109,7 @@ exports.deletePost = (req, res, next) => {
       // const post = await 
       //if( )
       Like.create({
-        like: req.body.like,
+        like: Like,
         UserId: req.body.UserId,
         PostId: req.body.PostId   
       })

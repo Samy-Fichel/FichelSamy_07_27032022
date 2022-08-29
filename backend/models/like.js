@@ -3,18 +3,29 @@ const sequelizedb = require('../db');
 
 
 const Like = sequelizedb.define("Like", {
+  like_id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+},
 
   like: {
     type: DataTypes.INTEGER,
   },
-  // usersLiked: { 
-  //   type: DataTypes.INTEGER,
-  //   allowNull: false,
-  //   references:{
-  //     model: 'Users',
-  //     key: 'id'
-  //   }
-  // },
+
+  UserId: {
+    type: DataTypes.INTEGER,
+    reference: "Users",
+    referenceKey: "UserId",
+  },
+
+  PostsId: {
+    type: DataTypes.INTEGER,
+    reference: "Posts",
+    referenceKey: "PostsId",
+  },
+
+
   
 });
 

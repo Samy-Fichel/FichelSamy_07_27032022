@@ -21,7 +21,29 @@ if (config.use_env_variable) {
 }
 
 
+// db.user = require("./user")(sequelize, Sequelize);
+// db.post = require("./post")(sequelize, Sequelize);
+// db.like = require("./like")(sequelize, Sequelize);
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+
+db.post.hasMany(db.like, {
+  onDelete: 'cascade',
+  foreignKey: { name: 'PostId', allowNull: false },
+  hooks: true });
+
+db.like.belongsTo(db.user, {
+  onDelete: "CASCADE",
+  foreignKey: { name: "UserId", allowNull: false },
+  hooks: true,
+});
+
+db.like.belongsTo(db.post, {
+  onDelete: "CASCADE",
+  foreignKey: { name: "PostId", allowNull: false },
+  hooks: true,
+});
+
 
 module.exports = db;
