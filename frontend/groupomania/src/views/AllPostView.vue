@@ -1,6 +1,5 @@
 <template>
   <div class="getAllPostHTML">
-    <!-- <h1>Bonjour AllPostView</h1> -->
     <div>
       <HeaderComponent />
     </div>
@@ -18,8 +17,6 @@
         :id="post.id"
         :like="post.like"
       />
-      <!-- <OnePost content="Bonjour je suis le contenu n°2" image="https://cdn.pixabay.com/photo/2018/03/31/06/31/dog-3277416_1280.jpg" UserId="username :Hugo" createdAt="2022-06-08" id="id: n°2"  />
-     <OnePost content="Bonjour je suis le contenu n°2" image="https://cdn.pixabay.com/photo/2018/03/31/06/31/dog-3277416_1280.jpg" UserId="username :Corinne" createdAt="2022-06-08" id="id: n°3"  /> -->
     </div>
   </div>
 </template>
@@ -40,8 +37,7 @@ export default {
   data() {
     return {
       allpostmsgs: "Toto",
-      // content: "",
-      // image: "",
+     
     };
   },
   methods: {
@@ -63,7 +59,6 @@ export default {
       .get("http://localhost:3000/api/auth/post", {
         headers: {
           "Content-Type": "multipart/form-data",
-          // 'Authorization': `Bearer ${this.token}`
         },
       })
 

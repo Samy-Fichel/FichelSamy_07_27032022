@@ -18,14 +18,12 @@ export default {
       type: String,
       required: false
     },
-    //*********************************START LIKES
     like: {
       type: Number,
       required: false,
       reference: "Like",
       referenceKey: "like",
     },
-    //************************************END LIKES
     content: {
       type: String,
       required: false
@@ -71,7 +69,7 @@ export default {
       }
       const data = {
         content: this.newcontent,
-        // image: this.image[0]
+        
       }
       axios.put(`http://localhost:3000/api/auth/post/${this.id}`, data, { headers: headers })
         .then(response => {
@@ -83,14 +81,10 @@ export default {
     },
 
     likePost() {
-      // const headers = {
-      //   "Content-Type": "multipart/form-data",
-      // }
       const data = {
         like: 1,
         userIdLike: 1,
         postIdLike: 1
-        // image: this.image[0]
       }
       axios.post(`http://localhost:3000/api/auth/post/${this.id}/like`, data,)
         .then(response => {
@@ -113,10 +107,8 @@ export default {
     <div class=" card-post color-card box-shadow mx-auto">
       <ImageUrl :url="image" class="img-onepost" />
     </div>
-    <!-- <button class="btn btn-danger btn-sm" @click="deletePost">Delete</button> -->
     <div class="buttonsComponent">
       <ButtonComponent label="Delete" name="Delete" class="buttoncreatecomponent" @click-btn="deletePost" />
-      <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Modify
       </button>
@@ -136,9 +128,7 @@ export default {
           </div>
           <div class="modal-body">
             <form class="" action="/images" method="PUT" enctype="multipart/form-data">
-              <!-- <label for="story">Tell us your story:</label> -->
               <input type="file" id="image" name="image" />
-              <!-- <input name="fileimg" type="file" accept="image/png, image/jpeg" class="" > -->
               <textarea id="post-textarea" v-model="newcontent" name="post-textarea" rows="3" cols="50">
         Que voulez-vous dire, (nom) ? 
     </textarea>
@@ -173,7 +163,6 @@ pb-3,
     margin: auto;
     margin-top: 3%;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     flex-direction: column;
     border-radius: 15px;

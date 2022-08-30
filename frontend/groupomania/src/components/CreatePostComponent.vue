@@ -1,9 +1,7 @@
 <template>
-  <!-- <h1>Bonjour AllPostView</h1> -->
+
   <form class="createpost" action="/images" method="POST" enctype="multipart/form-data">
-    <!-- <label for="story">Tell us your story:</label> -->
     <input type="file" id="image" name="image" @change="OnFileSeletedImg"/>
-    <!-- <input name="fileimg" type="file" accept="image/png, image/jpeg" class="" > -->
     <textarea
       id="post-textarea"
       name="post-textarea"
@@ -24,8 +22,6 @@
 </template>
 
 <script>
-// import HeaderComponent from '../components/HeaderComponent.vue';
-// import OnePost from '../components/OnePost.vue';
 import axios from "axios";
 import ButtonComponent from "../components/ButtonComponent.vue";
 export default {
@@ -69,19 +65,18 @@ export default {
        formD.append("content", this.content)
        } else {
           formD.append("content", this.content);
-          // formD.append("UserId", this.User.UserId)
+          
        }
      
       axios
         .post("http://localhost:3000/api/auth/post", formD, {
           headers: {
             "Content-Type": "multipart/form-data",
-            // Authorization: `Bearer ${this.$token}`
           },
         })
         .then((response) => {
           console.log(response);
-          this.$emit('create'); //
+          this.$emit('create'); 
         })
         .catch((error) => console.log(error));
     },
