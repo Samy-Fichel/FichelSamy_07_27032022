@@ -82,18 +82,6 @@ exports.deletePost = (req, res, next) => {
     //       .catch(error => res.status(400).json({ error }));
     //   }); // unlink pour supprimer un fichier et deuxième argument le callback 
 
-   
-      try {
-        const post = post.findById(req.params.id)
-        const User = User.findById(req.auth.userId)
-    
-        if (post.UserId.toString() !== req.auth.UserId) {
-          return response.status(401).json({msg: "Unhauthorized UserVerify"})
-        }
-        next()
-      } catch {
-        response.status(401).json({msg: 'Suppresion ou modification unauthorized'})
-      }
     Posts.destroy({where : {id : id} })
     .then(ressourceId => {
         if (ressourceId == 0) return res.status(404).json({msg: 'erreur suppression du post'})
@@ -109,10 +97,10 @@ exports.deletePost = (req, res, next) => {
       // const post = await 
       //if( )
       Like.create({
-        like: Like,
+        like: req.body.like,
         UserId: req.body.UserId,
-        PostId: req.body.PostId   
-      })
+        PostId: req.body.PostsId   
+      }) 
       .then(postLike => {
         console.log("Like +1 (OK)");
         res.status(201).json(postLike);

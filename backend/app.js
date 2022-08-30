@@ -99,7 +99,7 @@ app.use('/api/auth', userRoutes);
 
       await sequelizedb.sync({ force: true });
 
-      const user1 = Usermodel.build({email: "Test@gmail.com", username:"test", password:"Test01", });
+      const user1 = Usermodel.build({email: "test@gmail.com", username:"test", password:"$2b$10$DGmeSe9xYf38LZn6VzVk9OaNSH/wXdOOe3dNCB5U7WY.o5d84Wu6m", });
       await user1.save();
 
       const user2 = Usermodel.build({email: "Samy@gmail.com", username:"samy", password:"Samyfich88", });

@@ -22,7 +22,8 @@ export default {
     like: {
       type: Number,
       required: false,
-      referenceKey: "like_id",
+      reference: "Like",
+      referenceKey: "like",
     },
     //************************************END LIKES
     content: {
@@ -94,9 +95,11 @@ export default {
       axios.post(`http://localhost:3000/api/auth/post/${this.id}/like`, data,)
         .then(response => {
           console.log(response);
+          alert('Post liké');
         })
         .catch(function (error) {
           console.log(error.response)
+          alert('erreur lors du like veuillez réessayer')
         })
     },
   }
@@ -105,31 +108,23 @@ export default {
 
 <template>
   <div class="container-card mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-    <div class="name-card-user-created">
-      <div class="userid">
-        <p class="username-id">{{ UserId }}</p>
-      </div>
-      <div class="userid">
-        <p class="username-id">{{ createdAt }}</p>
-      </div>
-      <div>
-       <p>{{this.id}}</p>
-      </div>
-    </div>
 
     <div class="my-3 p-3 py-3">{{ content }}</div>
     <div class=" card-post color-card box-shadow mx-auto">
       <ImageUrl :url="image" class="img-onepost" />
     </div>
     <!-- <button class="btn btn-danger btn-sm" @click="deletePost">Delete</button> -->
-    <ButtonComponent label="Delete" name="Delete" class="buttoncreatecomponent" @click-btn="deletePost" />
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Modify
-    </button>
-    <div class="like-post-container">
-        <ButtonComponent label="" name="like" v-model="likeOnePost" class="buttoncreatecomponent fas fa-heart fa-2x me-3 pt-5 mt-xl-4" @click-btn="likePost" />
+    <div class="buttonsComponent">
+      <ButtonComponent label="Delete" name="Delete" class="buttoncreatecomponent" @click-btn="deletePost" />
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Modify
+      </button>
+      <div class="like-post-container">
+          <ButtonComponent label="" name="like" v-model="likeOnePost" class="fas fa-heart fa-2x" @click-btn="likePost" />
+      </div>
     </div>
+   
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -168,32 +163,30 @@ pb-3,
   background-color: #4E5166;
   color: white;
   width: 125%;
-  height: 130px;
   border-radius: 15px 15px 0px 0px;
 }
 
 .container-card {
   background-color: #e5e3e3;
-  width: 40%;
-  max-width: 100%;
-  margin: auto;
-  margin-top: 3%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 50px 50px 0px 0px;
-  padding: 10%;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    margin-top: 3%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 10px;
 }
 
 .card-post {
   max-width: 100%;
   max-height: 100%;
-  border-radius: 50px 50px 0px 0px;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 4px solid #FD2D01;
 }
 
 .color-card {
@@ -220,9 +213,14 @@ pb-3,
 
 .name-card-user-created {
   display: flex;
+  flex-direction: column;
 }
 
 .username-id {
   margin: 1.5em;
+}
+.buttonsComponent{
+  display: flex;
+  margin-top: 20px;
 }
 </style>

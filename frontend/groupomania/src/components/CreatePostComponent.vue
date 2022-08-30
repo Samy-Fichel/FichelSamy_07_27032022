@@ -40,7 +40,7 @@ export default {
     return{
        content: 'test',  //fonction qui retourne un obj
        image: '',
-       UserId: 3,
+       UserId: 1,
     }
    
   },
@@ -81,7 +81,7 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          // this.$router.push("/create");
+          this.$emit('create'); //
         })
         .catch((error) => console.log(error));
     },

@@ -8,8 +8,8 @@ const Posts = sequelizedb.define("Posts", {
   },
   like: {
     type: DataTypes.INTEGER,
-    reference: "like",
-    referenceKey: "like_id",
+    reference: "Like",
+    referenceKey: "like",
   },
   content: {
     type: DataTypes.STRING,
