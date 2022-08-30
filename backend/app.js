@@ -1,14 +1,12 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 var multer = require('multer');
-// var upload = multer();
 const app = express();
 /***** middleware ****************/
 const helmet = require("helmet");
 const path = require('path');
 const cors = require('cors');
 const rateLimit = require("./middleware/rate-limit");
-// const auth = require('./middleware/auth');
 /***** middleware ****************/
 /***** models sequelize ****************/
 const Postmodel = require("./models/post");
@@ -25,59 +23,19 @@ const userRoutes = require('./routes/user');
 const { Router } = require('express');
 
 
-
-
-
-
-
-
  
 app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" })); //permet de résoudre le probleme d'image 
-// app.use(auth());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" })); //permet de résoudre le problème d'image 
 app.use(rateLimit);
 
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  
-//   next();
-// });
 
 app.use(bodyParser.json()); 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(upload.array()); 
 app.use(express.json());
 app.use(cors());
 app.use ('/api/auth/post', postsRoutes);
 app.use('/api/auth', userRoutes);
-// app.use('/api/auth', likeRoutes);
-
-// app.post('/images', (req, res) => {
-//   upload(req, res, (err) => {
-//     if(err){
-//       res.render('index', {
-//         msg: err
-//       });
-//     } else {
-//       if(req.file == undefined){
-//         res.render('index', {
-//           msg: 'Error: No File Selected!'
-//         });
-//       } else {
-//         res.render('index', {
-//           msg: 'File Uploaded!',
-//           file: `images/${req.file.filename}`
-//         });
-//       }
-//     }
-//   });
-// });
-
-/********************************************** ******************************/
-
 
 //Connexion à la database 
 
@@ -119,8 +77,5 @@ app.use('/api/auth', userRoutes);
   };
   
   initSequelize(); 
-
-//Chemin vers les différents routes
-//app.use('/api/posts', postsRoutes);
 
 module.exports = app;

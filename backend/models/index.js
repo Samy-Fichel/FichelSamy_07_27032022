@@ -9,7 +9,7 @@ const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
 console.log('init sequelize');
-//exécute la fonction associate
+
 
 
 
@@ -21,9 +21,6 @@ if (config.use_env_variable) {
 }
 
 
-// db.user = require("./user")(sequelize, Sequelize);
-// db.post = require("./post")(sequelize, Sequelize);
-// db.like = require("./like")(sequelize, Sequelize);
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

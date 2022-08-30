@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { post } = require('../app');
 const Post = require('../models/post');
 const User = require('../models/user');
-// const dotenv = require('dotenv').config();
+
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
 
@@ -27,20 +27,3 @@ module.exports = (req, res, next) => {
         res.status(401).json({ error: error | 'Requête non authentifiée !' })
     }
 }
-
-// const isAdminLogin = (isAdmin) =>
-// axios.post('http://localhost:3000/auth/login', isAdmin)
-
-// const adminAuthenticated = () => {
-//   const token = req.body.auth.userId
-//   if (token) return true
-//   else false
-// }
-
-
-
-  // export default {
-  //   isAdminLogin,
-  //   adminAuthenticated
-    
-  // }
