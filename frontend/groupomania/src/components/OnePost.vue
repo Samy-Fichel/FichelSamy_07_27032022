@@ -91,7 +91,12 @@ export default {
         postIdLike: this.id,
         userIdLike: this.UserId
       }
-      axios.post(`http://localhost:3000/api/auth/post/${this.id}/like`, data,)
+      console.log
+      axios.post(`http://localhost:3000/api/auth/post/${this.id}/like`, data, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      })
         .then(response => {
           console.log(response);
           alert('Post liké');

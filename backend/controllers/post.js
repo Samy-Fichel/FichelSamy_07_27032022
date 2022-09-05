@@ -9,7 +9,7 @@ const { post, resource, response } = require('../app');
 
 exports.getAllPosts = (req, res, next) => {
     Postmodel.findAll({
-        include: Usermodel, Like
+        include: [Usermodel, Like]
     })
         .then(posts => {
             res.status(200).json(posts)
@@ -67,6 +67,8 @@ exports.modifyPost = (req, res, next) => {
         if(!Posts) return res.status(404).json({message: "erreur avec la modification du post test"})
     
         Posts.content = body.content
+        Posts.image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        console.log('test image', Posts.image);
         Posts.save({where : {id: id} }) 
         .then(() => res.status(200).json({message: "Modification du post OK"}))
         .catch((error) => res.status(500).json(error)); 

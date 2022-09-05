@@ -21,6 +21,7 @@ const result = dotenv.config();
 const postsRoutes = require('./routes/posts');
 const userRoutes = require('./routes/user');
 const { Router } = require('express');
+const Like = require('./models/like');
 
 
  
@@ -68,7 +69,11 @@ app.use('/api/auth', userRoutes);
 
       const post2 = Postmodel.build({ image:"https://cdn.pixabay.com/photo/2022/02/20/13/56/red-throated-barbet-7024605_1280.jpg", content: "Bonjour je suis le contenu N°2", UserId: 1});
       await post2.save();
-    
+    const postLike = Likemodel.build({
+      UserId: 1,
+      PostId: 1
+    })
+    postLike.save();
     
 
     } catch (error) {

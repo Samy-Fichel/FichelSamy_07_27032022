@@ -69,12 +69,13 @@ export default {
           .then((response) => {
             const token = response.data.token;
             // const userId = response.data.userId;
-            localStorage.setItem("token", JSON.stringify(token));
+            localStorage.setItem("token", token);
             // localStorage.setItem("userId", JSON.stringify(userId));
             console.log("Je suis le token",localStorage.token);
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
-            alert("Vous êtes connectée");
+            console.log('localStoragegetitem', localStorage.getItem('token'));
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
             console.log(User)
+            alert('Login OK');
             this.$router.push("/home");
           })
           .catch((error) => console.log(error));

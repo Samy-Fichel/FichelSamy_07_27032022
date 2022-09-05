@@ -55,13 +55,14 @@ export default {
   },
   mounted() {
     this.allpostmsgs = "Bonjour Samy";
+    console.log('getAllPosts', localStorage.getItem('token'));
     axios
       .get("http://localhost:3000/api/auth/post", {
         headers: {
-          "Content-Type": "multipart/form-data",
-        },
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
       })
-
+    
       .then((response) => {
         this.allpostmsgs = response.data.reverse();
         console.log(this.allpostmsgs);
