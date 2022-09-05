@@ -48,7 +48,7 @@ exports.login = (req, res, next) => {
                               isAdmin: user.isAdmin
                             },
                             `${process.env.CLE_JSONWEBTOKEN}`,
-                            { expiresIn: '24h' } 
+                            { expiresIn: '24h' },
                         )
                     });
                 })

@@ -9,21 +9,17 @@ const Like = sequelizedb.define("Like", {
     primaryKey: true,
 },
 
-  like: {
-    type: DataTypes.INTEGER,
-  },
+  // User_Id: {
+  //   type: DataTypes.INTEGER,
+  //   reference: "Users",
+  //   referenceKey: "UserId",
+  // },
 
-  UserId: {
-    type: DataTypes.INTEGER,
-    reference: "Users",
-    referenceKey: "UserId",
-  },
-
-  PostsId: {
-    type: DataTypes.INTEGER,
-    reference: "Posts",
-    referenceKey: "PostsId",
-  },
+  // Posts_Id: {
+  //   type: DataTypes.INTEGER,
+  //   reference: "Posts",
+  //   referenceKey: "PostsId",
+  // },
 
 
   

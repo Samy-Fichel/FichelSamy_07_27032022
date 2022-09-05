@@ -9,7 +9,10 @@ const postsCtrl = require('../controllers/post');
 
 router.get('/', auth, postsCtrl.getAllPosts);  
 router.post('/', auth, upload.single('image'), postsCtrl.createPost);
+
 router.put('/:id', auth, upload.single('image'), postsCtrl.modifyPost);
+router.put('/:id', auth, upload.single('image'), postsCtrl.modifyPostImage);
+
 router.delete('/:id',  auth, postsCtrl.deletePost);
 
 router.post('/:id/like', auth, postsCtrl.likePosts);

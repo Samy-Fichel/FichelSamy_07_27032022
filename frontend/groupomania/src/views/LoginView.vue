@@ -48,6 +48,7 @@ export default {
     return{
        email: '',  //fonction qui retourne un obj
        password: '',
+      
     }
    
   },
@@ -66,7 +67,11 @@ export default {
           body: User
         })
           .then((response) => {
-            console.log("Je suis le token",response.data.token);
+            const token = response.data.token;
+            // const userId = response.data.userId;
+            localStorage.setItem("token", JSON.stringify(token));
+            // localStorage.setItem("userId", JSON.stringify(userId));
+            console.log("Je suis le token",localStorage.token);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
             alert("Vous êtes connectée");
             console.log(User)

@@ -18,12 +18,12 @@ export default {
       type: String,
       required: false
     },
-    like: {
-      type: Number,
-      required: false,
-      reference: "Like",
-      referenceKey: "like",
-    },
+    // like: {
+    //   type: Number,
+    //   required: false,
+    //   reference: "Like",
+    //   referenceKey: "like",
+    // },
     content: {
       type: String,
       required: false
@@ -40,11 +40,16 @@ export default {
       type: Number,
       required: false
     },
+    PostsId: {
+      type: Number,
+      required: false
+    },
+
   },
   data() {
     return {
       newcontent: this.content,
-      likeOnePost: this.like,
+      // likeOnePost: this.like,
       userIdLike: this.UserId,
       postIdLike: this.PostsId
     }
@@ -62,6 +67,7 @@ export default {
           console.log(error.response)
         })
     },
+    
     modifyPost() {
       console.log("this.id", this.id)
       const headers = {
@@ -82,9 +88,8 @@ export default {
 
     likePost() {
       const data = {
-        like: 1,
-        userIdLike: 1,
-        postIdLike: 1
+        postIdLike: this.id,
+        userIdLike: this.UserId
       }
       axios.post(`http://localhost:3000/api/auth/post/${this.id}/like`, data,)
         .then(response => {

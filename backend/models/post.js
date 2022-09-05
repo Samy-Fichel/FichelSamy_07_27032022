@@ -6,17 +6,16 @@ const Posts = sequelizedb.define("Posts", {
   image: {
     type: DataTypes.STRING,
   },
-  like: {
-    type: DataTypes.INTEGER,
-    reference: "Like",
-    referenceKey: "like",
-  },
+  // like: {
+  //   type: DataTypes.INTEGER,
+  //   reference: "Like",
+  //   referenceKey: "like",
+  // },
+  
   content: {
     type: DataTypes.STRING,
   },
   
-
-
 });
 
 Posts.associate = function (models) {

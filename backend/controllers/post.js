@@ -32,10 +32,34 @@ exports.createPost = (req, res, next) => {
 };
 
 
+exports.modifyPostImage = (req, res, next) => {
+  const {id} = req.params
+  const {body} = req
+  Posts.findOne({where: {id: id} })
+  .then(Posts => {
+    if (req.file) {
+      const imageFile = Posts.image.split('/images/')[1];
+      if (imageFile != "image.jpg") {
+        fs.unlink(`images/${imageFile}`, (err) => {
+          if (err) throw err;
+        });
+      }
+      const updateImage = {
+        image:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      };
+      Posts.update(
+        updateImage, {where: {id: id}},
+      )
+      .then(() => res.status(201).json({msg: 'Image modifié OK'}))
+      .catch(() => res.status(500).json({error}));
+    };
+  })
+  .catch(error => res.stauts(500).json({error}));
+}
 
 exports.modifyPost = (req, res, next) => {
     const {id} = req.params
-    const UserId  = req.param.UserId
+    // const UserId  = req.param.UserId
     const {body} = req
 
     Posts.findByPk(id)
@@ -51,8 +75,15 @@ exports.modifyPost = (req, res, next) => {
 
 exports.deletePost = (req, res, next) => {
     const {id} = req.params
-
-
+    Posts.findOne({ where: {id: id} })
+    .then(Posts => {
+      if (Posts.image != null) {
+        const fileImage = Posts.image.split('/images/') [1];
+        fs.unlink(`images/${fileImage}`, (err) => {
+          if (err) throw err;
+        })
+      }
+    });
     Posts.destroy({where : {id : id} })
     .then(ressourceId => {
         if (ressourceId == 0) return res.status(404).json({msg: 'erreur suppression du post'})
@@ -64,10 +95,12 @@ exports.deletePost = (req, res, next) => {
   exports.likePosts = (req, res, next) => {
     try {
       console.log(req.body);
+      const {id} = req.params
+      const UserId = req.body
       Like.create({
-        like: req.body.like,
-        UserId: req.body.UserId,
-        PostId: req.body.PostsId   
+        // like: req.body.like,
+        UserId: UserId,
+        PostsId: id  
       }) 
       .then(postLike => {
         console.log("Like +1 (OK)");
