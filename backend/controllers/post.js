@@ -101,7 +101,7 @@ exports.deletePost = (req, res, next) => {
       const {id} = req.params
       const UserId = req.body
       Like.create({
-        // like: req.body.like,
+        // like_id: req.body.like,
         UserId: UserId,
         PostsId: id  
       }) 

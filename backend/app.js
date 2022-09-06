@@ -71,7 +71,8 @@ app.use('/api/auth', userRoutes);
       await post2.save();
     const postLike = Likemodel.build({
       UserId: 1,
-      PostId: 1
+      PostId: 1,
+      
     })
     postLike.save();
     

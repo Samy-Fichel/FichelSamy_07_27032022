@@ -76,7 +76,7 @@ export default {
       console.log("this.id", this.id)
       const data = {
         content: this.newcontent,
-        image: this.file.image
+        image: this.image
         
       }
       axios.put(`http://localhost:3000/api/auth/post/${this.id}`, data, { 
@@ -106,6 +106,7 @@ export default {
       })
         .then(response => {
           console.log(response);
+          {Posts.Likes.length}
           alert('Post liké');
         })
         .catch(function (error) {
@@ -130,7 +131,8 @@ export default {
         Modify
       </button>
       <div class="like-post-container">
-          <ButtonComponent label="" name="like" v-model="likeOnePost" class="fas fa-heart fa-2x" @click-btn="likePost" />
+          <ButtonComponent label="" name="like" class="fas fa-heart fa-2x" @click-btn="likePost" />
+           <!-- <span>{{Posts.Likes.length}}</span>  -->
       </div>
     </div>
    
