@@ -106,7 +106,7 @@ export default {
       })
         .then(response => {
           console.log(response);
-          {Posts.Likes.length}
+          // {Posts.Likes.length}
           alert('Post liké');
         })
         .catch(function (error) {

@@ -15,7 +15,7 @@
         :createdAt="post.createdAt"
         :UserId="post.UserId"
         :id="post.id"
-        :like="post.like"
+        :like="post.like_id"
       />
     </div>
   </div>
