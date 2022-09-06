@@ -59,7 +59,11 @@ export default {
       const data = {
         id: this.id
       }
-      axios.delete(`http://localhost:3000/api/auth/post/${this.id}`, data)
+      axios.delete(`http://localhost:3000/api/auth/post/${this.id}`, data, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      })
         .then(response => {
           console.log(response);
         })
@@ -70,14 +74,17 @@ export default {
     
     modifyPost() {
       console.log("this.id", this.id)
-      const headers = {
-        "Content-Type": "multipart/form-data",
-      }
       const data = {
         content: this.newcontent,
+        image: this.file.image
         
       }
-      axios.put(`http://localhost:3000/api/auth/post/${this.id}`, data, { headers: headers })
+      axios.put(`http://localhost:3000/api/auth/post/${this.id}`, data, { 
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+       })
         .then(response => {
           console.log(response);
         })

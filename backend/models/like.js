@@ -27,10 +27,12 @@ const Like = sequelizedb.define("Like", {
 
 Like.associate = function (models) {
   console.log('essai association Like user');
-  Like.belongsTo(models.Users, {
+  Like.belongsTo(models.Users, { 
+    as: "Users",
   });
 
   Like.belongsTo(models.Post, {
+    as: "Posts",
   });
   
 };

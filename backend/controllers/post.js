@@ -9,10 +9,11 @@ const { post, resource, response } = require('../app');
 
 exports.getAllPosts = (req, res, next) => {
     Postmodel.findAll({
-        include: [Usermodel, Like]
+        include: {model: Usermodel, as: 'Users', model: Like, as:'Likes'},  
     })
-        .then(posts => {
-            res.status(200).json(posts)
+    // console.log('include postmodel', Postmodel.findAll)
+        .then(Posts => {
+            res.status(200).json(Posts)
         })
         .catch((erreur) => res.status(500).json({ message: erreur }));
 };
@@ -32,30 +33,30 @@ exports.createPost = (req, res, next) => {
 };
 
 
-exports.modifyPostImage = (req, res, next) => {
-  const {id} = req.params
-  const {body} = req
-  Posts.findOne({where: {id: id} })
-  .then(Posts => {
-    if (req.file) {
-      const imageFile = Posts.image.split('/images/')[1];
-      if (imageFile != "image.jpg") {
-        fs.unlink(`images/${imageFile}`, (err) => {
-          if (err) throw err;
-        });
-      }
-      const updateImage = {
-        image:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-      };
-      Posts.update(
-        updateImage, {where: {id: id}},
-      )
-      .then(() => res.status(201).json({msg: 'Image modifié OK'}))
-      .catch(() => res.status(500).json({error}));
-    };
-  })
-  .catch(error => res.stauts(500).json({error}));
-}
+// exports.modifyPostImage = (req, res, next) => {
+//   const {id} = req.params
+//   const {body} = req
+//   Posts.findOne({where: {id: id} })
+//   .then(Posts => {
+//     if (req.file) {
+//       const imageFile = Posts.image.split('/images/')[1];
+//       if (imageFile != "image.jpg") {
+//         fs.unlink(`images/${imageFile}`, (err) => {
+//           if (err) throw err;
+//         });
+//       }
+//       const updateImage = {
+//         image:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+//       };
+//       Posts.update(
+//         updateImage, {where: {id: id}},
+//       )
+//       .then(() => res.status(201).json({msg: 'Image modifié OK'}))
+//       .catch(() => res.status(500).json({error}));
+//     };
+//   })
+//   .catch(error => res.stauts(500).json({error}));
+// }
 
 exports.modifyPost = (req, res, next) => {
     const {id} = req.params

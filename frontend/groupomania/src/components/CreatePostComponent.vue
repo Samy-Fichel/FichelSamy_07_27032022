@@ -72,6 +72,7 @@ export default {
         .post("http://localhost:3000/api/auth/post", formD, {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: 'Bearer ' + localStorage.getItem('token')
           },
         })
         .then((response) => {
