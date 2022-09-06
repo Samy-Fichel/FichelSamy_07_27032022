@@ -44,7 +44,9 @@ export default {
       type: Number,
       required: false
     },
-
+    Likes: {
+      type: Array,
+    },
   },
   data() {
     return {
@@ -96,7 +98,8 @@ export default {
     likePost() {
       const data = {
         postIdLike: this.id,
-        userIdLike: this.UserId
+        userIdLike: this.UserId,
+        Likes: this.like_id
       }
       console.log
       axios.post(`http://localhost:3000/api/auth/post/${this.id}/like`, data, {
@@ -132,7 +135,7 @@ export default {
       </button>
       <div class="like-post-container">
           <ButtonComponent label="" name="like" class="fas fa-heart fa-2x" @click-btn="likePost" />
-           <!-- <span>{{Posts.Likes.length}}</span>  -->
+            <span>{{Likes.length}}</span> 
       </div>
     </div>
    

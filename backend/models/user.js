@@ -14,6 +14,7 @@ const Users = sequelizedb.define("Users", {
   },
   isAdmin: {
     type: DataTypes.BOOLEAN,
+    default: false
   },
   
 });
