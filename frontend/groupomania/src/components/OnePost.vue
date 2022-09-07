@@ -47,7 +47,8 @@ export default {
     return {
       newcontent: this.content,
       userIdLike: this.UserId,
-      postIdLike: this.PostsId
+      postIdLike: this.PostsId,
+      newimage: this.image
     }
   },
   methods: {
@@ -69,10 +70,14 @@ export default {
     },
     
     modifyPost() {
+      const formDFront = new FormData(); {
+       formDFront.append("image", this.image)
+       }
+
       console.log("this.id", this.id)
       const data = {
         content: this.newcontent,
-        image: this.image
+        image: this.newimage 
         
       }
       axios.put(`http://localhost:3000/api/auth/post/${this.id}`, data, { 
