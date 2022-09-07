@@ -32,32 +32,6 @@ exports.createPost = (req, res, next) => {
     .catch(error => res.status(500).json({error, message: "Il y a un probleme avec la création du post"}));
 };
 
-
-// exports.modifyPostImage = (req, res, next) => {
-//   const {id} = req.params
-//   const {body} = req
-//   Posts.findOne({where: {id: id} })
-//   .then(Posts => {
-//     if (req.file) {
-//       const imageFile = Posts.image.split('/images/')[1];
-//       if (imageFile != "image.jpg") {
-//         fs.unlink(`images/${imageFile}`, (err) => {
-//           if (err) throw err;
-//         });
-//       }
-//       const updateImage = {
-//         image:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-//       };
-//       Posts.update(
-//         updateImage, {where: {id: id}},
-//       )
-//       .then(() => res.status(201).json({msg: 'Image modifié OK'}))
-//       .catch(() => res.status(500).json({error}));
-//     };
-//   })
-//   .catch(error => res.stauts(500).json({error}));
-// }
-
 exports.modifyPost = (req, res, next) => {
     const {id} = req.params
     // const UserId  = req.param.UserId
