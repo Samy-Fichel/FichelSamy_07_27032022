@@ -25,10 +25,10 @@ export default {
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ms-auto">
 							<li class="nav-item">
-								<router-link :to="{ name: 'login' }"><a class="nav-link active" aria-current="page">S’identifier</a></router-link>
+								<router-link :to="{ name: 'login' }"><a class="menu-link nav-link active" aria-current="page">S’identifier</a></router-link>
 							</li>
 							<li class="nav-item">
-								<router-link :to="{ name: 'signup' }"><a class="nav-link">S’inscrire</a></router-link>
+								<router-link :to="{ name: 'signup' }"><a class="menu-link nav-link">S’inscrire</a></router-link>
 							</li>
 						</ul>
 					</div>
@@ -39,14 +39,19 @@ export default {
 </template>
 
 <style>
+	.menu-link{
+		color: #4E5166 !important;
+	}
 .header {
 	background-color: #eee;
+
 }
 .bg-custom {
-	background-color: #4e5166;
+	background-color: #FFD7D7;
 }
 
 .logo-gp {
 	height: 40px;
 }
+
 </style>

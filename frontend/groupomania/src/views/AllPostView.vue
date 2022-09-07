@@ -8,6 +8,8 @@
     </div>
     <div>
       <OnePost 
+        @delete="refreshPosts"
+        @update="refreshPosts"
         @like="refreshPosts"
         v-for="post in allpostmsgs"
         :key="post.id"

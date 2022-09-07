@@ -52,6 +52,11 @@ export default {
     }
   },
   methods: {
+    OnFileSeletedImg(event) {
+      console.log(event);
+      this.newimage = event.target.files[0];
+    },
+
     deletePost() {
       const data = {
         id: this.id
@@ -63,6 +68,7 @@ export default {
       })
         .then(response => {
           console.log(response);
+          this.$emit('delete'); 
         })
         .catch(function (error) {
           console.log(error.response)
@@ -88,6 +94,7 @@ export default {
        })
         .then(response => {
           console.log(response);
+          this.$emit('update'); 
         })
         .catch(function (error) {
           console.log(error.response)
@@ -172,7 +179,7 @@ export default {
           </div>
           <div class="modal-body">
             <form class="" action="/images" method="PUT" enctype="multipart/form-data">
-              <input type="file" id="image" name="image" />
+              <input type="file" id="image" name="image"  @change="OnFileSeletedImg" />
               <textarea id="post-textarea" v-model="newcontent" name="post-textarea" rows="3" cols="50">
         Que voulez-vous dire, (nom) ? 
     </textarea>
