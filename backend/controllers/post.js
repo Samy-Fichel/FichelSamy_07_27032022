@@ -11,7 +11,6 @@ exports.getAllPosts = (req, res, next) => {
     Postmodel.findAll({
         include: {model: Usermodel, as: 'Users', model: Like, as:'Likes'},  
     })
-    // console.log('include postmodel', Postmodel.findAll)
         .then(Posts => {
             res.status(200).json(Posts)
         })

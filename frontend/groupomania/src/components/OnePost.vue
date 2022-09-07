@@ -18,12 +18,7 @@ export default {
       type: String,
       required: false
     },
-    // like: {
-    //   type: Number,
-    //   required: false,
-    //   reference: "Like",
-    //   referenceKey: "like",
-    // },
+
     content: {
       type: String,
       required: false
@@ -51,7 +46,6 @@ export default {
   data() {
     return {
       newcontent: this.content,
-      // likeOnePost: this.like,
       userIdLike: this.UserId,
       postIdLike: this.PostsId
     }

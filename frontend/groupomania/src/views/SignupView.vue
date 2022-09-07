@@ -2,10 +2,6 @@
   <section class="vh-100">
     <div class="container-fluid">
       <div class="px-5 ms-xl-4">
-        <i
-          class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4"
-          style="color: #709085"
-        ></i>
         <span class="h1 fw-bold mb-0"
           ><img src="../assets/logo.png" class="logo-gp" alt="..."
         /></span>
