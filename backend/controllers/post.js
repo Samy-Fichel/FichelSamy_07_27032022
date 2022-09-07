@@ -72,11 +72,11 @@ exports.deletePost = (req, res, next) => {
     try {
       console.log(req.body);
       const {id} = req.params
-      const UserId = req.body
+      const UserId = req.body.UserId
       Like.create({
         // like_id: req.body.like,
         UserId: UserId,
-        PostsId: id  
+        PostId: id  
       }) 
       .then(postLike => {
         console.log("Like +1 (OK)");

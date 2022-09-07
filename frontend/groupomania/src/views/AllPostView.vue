@@ -4,10 +4,11 @@
       <HeaderComponent />
     </div>
     <div>
-      <CreatePostComponent @create="onCreatePost" /> 
+      <CreatePostComponent @create="refreshPosts" /> 
     </div>
     <div>
-      <OnePost
+      <OnePost 
+        @like="refreshPosts"
         v-for="post in allpostmsgs"
         :key="post.id"
         :content="post.content"
@@ -41,7 +42,7 @@ export default {
     };
   },
   methods: {
-    onCreatePost: function () {
+    refreshPosts: function () {
       axios
         .get("http://localhost:3000/api/auth/post", {
         })

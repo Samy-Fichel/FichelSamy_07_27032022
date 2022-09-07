@@ -96,9 +96,8 @@ export default {
 
     likePost() {
       const data = {
-        postIdLike: this.id,
-        userIdLike: this.UserId,
-        Likes: this.like_id
+        PostId: this.id,
+        UserId: this.UserId,
       }
       console.log
       axios.post(`http://localhost:3000/api/auth/post/${this.id}/like`, data, {
@@ -109,13 +108,25 @@ export default {
         .then(response => {
           console.log(response);
           // {Posts.Likes.length}
-          alert('Post liké');
+          this.$emit('like'); 
         })
         .catch(function (error) {
           console.log(error.response)
           alert('erreur lors du like veuillez réessayer')
         })
     },
+
+    likeExist() {
+      const userId = localStorage.getItem("userId");
+      let likeExist = false;
+
+      this.Likes.forEach(like => {
+        if(like.UserId == userId){
+          likeExist = true
+        }
+      });
+      return likeExist;
+    }
   }
 };
 </script>
@@ -133,8 +144,9 @@ export default {
         Modify
       </button>
       <div class="like-post-container">
-          <ButtonComponent label="" name="like" class="fas fa-heart fa-2x" @click-btn="likePost" />
-            <span>{{Likes.length}}</span> 
+          <ButtonComponent v-if="likeExist()" label="" name="like" class="liked fas fa-heart fa-2x"/>
+          <ButtonComponent v-else label="" name="like" class="fas fa-heart fa-2x" @click-btn="likePost" />
+            <span>{{Likes.length}}</span>  
       </div>
     </div>
    
@@ -232,5 +244,8 @@ pb-3,
 .buttonsComponent{
   display: flex;
   margin-top: 20px;
+}
+.liked{
+  color:blue;
 }
 </style>
