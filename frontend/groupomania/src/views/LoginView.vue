@@ -68,9 +68,11 @@ export default {
           .then((response) => {
             const token = response.data.token;
             const userId = response.data.userId;
+            const isAdmin = response.data.isAdmin;
             // const userId = response.data.userId;
             localStorage.setItem("token", token);
             localStorage.setItem("userId", userId);
+            localStorage.setItem("isAdmin", isAdmin);
             // localStorage.setItem("userId", JSON.stringify(userId));
             console.log("Je suis le token",localStorage.token);
             console.log('localStoragegetitem', localStorage.getItem('token'));

@@ -126,6 +126,17 @@ export default {
         }
       });
       return likeExist;
+    },
+
+    canEdit() {
+      const isAdmin = localStorage.getItem("isAdmin");
+      const userId = localStorage.getItem("userId");
+      const postUserId = this.UserId;
+      if(isAdmin === "true" || userId == postUserId){
+        return true;
+      }else{
+        return false;
+      }
     }
   }
 };
@@ -139,8 +150,8 @@ export default {
       <ImageUrl :url="image" class="img-onepost" />
     </div>
     <div class="buttonsComponent">
-      <ButtonComponent label="Delete" name="Delete" class="buttoncreatecomponent" @click-btn="deletePost" />
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <ButtonComponent v-if="canEdit()" label="Delete" name="Delete" class="buttoncreatecomponent" @click-btn="deletePost" />
+      <button v-if="canEdit()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Modify
       </button>
       <div class="like-post-container">

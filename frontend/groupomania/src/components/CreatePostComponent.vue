@@ -60,7 +60,7 @@ export default {
       console.log("image", this.image)
       const formD = new FormData();
        if (this.image !== null){
-       formD.append("UserId", this.UserId)
+       formD.append("UserId", localStorage.getItem("userId"))
        formD.append("image", this.image)
        formD.append("content", this.content)
        } else {
