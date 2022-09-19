@@ -1,8 +1,20 @@
 /* eslint-disable vue/no-multiple-template-root */
 <script>
+
 import ImageUrl from "../components/ImageUrl.vue";
+let logout = () => {
+	localStorage.removeItem('token')
+	localStorage.removeItem('userId')
+	localStorage.removeItem('isAdmin')
+}
 export default {
 	name: "HeaderComponent",
+	methods:{
+		logout(){
+			logout()
+			this.$router.push('/login')
+		}
+	},
 	component: {
 		ImageUrl,
 	},
@@ -30,6 +42,9 @@ export default {
 							<li class="nav-item">
 								<router-link :to="{ name: 'signup' }"><a class="menu-link nav-link">S’inscrire</a></router-link>
 							</li>
+							<li>
+								<button @click="logout()" class="logout">Se déconnecter</button>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -53,5 +68,17 @@ export default {
 .logo-gp {
 	height: 40px;
 }
-
+.logout{
+	margin: auto;
+    padding: 4px;
+	background-color:#fcd7d7;
+}
+.logout:hover {
+	background-color: rgb(78, 81, 102);
+	color: white;
+}
+.logout:active{
+	box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
 </style>
