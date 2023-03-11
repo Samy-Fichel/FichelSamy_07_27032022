@@ -16,7 +16,7 @@ Clonez le dépôt : https://github.com/Samy-Fichel/FichelSamy_07_27032022
 ## Ouvrir le dossier frontend puis groupomania dans le terminal d'un éditeur puis éxécuter la commande: ##
 * npm install
 puis
-* npm run serve ou npm start 
+* npm run serve 
 puis rendez-vous sur le lien suivant: 
 * http://localhost:8080/home
 
